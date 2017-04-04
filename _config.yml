@@ -13,19 +13,21 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Computer Networks and Control systems
+title: Computer Networks and Control Systems
 email: alun.moon@northumbria.ac.uk
 description: > # this means to ignore newlines until "baseurl:"
-  Discussion and development of the module
-  Computer Networks and Control Systems (KF5011) for first delivery in the Spring of 2018.
+   Development and material for the new module, due Spring 2018
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username:
+github_username:
 
 # Build settings
 markdown: kramdown
+kramdown:
+    input: GFM
 theme: minima
 gems:
-
 exclude:
   - Gemfile
   - Gemfile.lock
