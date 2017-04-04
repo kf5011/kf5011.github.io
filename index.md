@@ -7,8 +7,6 @@ layout: home
 
 # Computer Networks and Control Systems KF5011
 
-This module
-
 # reading list
 Some suggested texts:
 
