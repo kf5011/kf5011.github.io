@@ -7,3 +7,4 @@ layout: page
 # [Reading list](books)
 # [Development Software](platform)
 # [Course structure and content](structure)
+# [Hardware](hardware)
