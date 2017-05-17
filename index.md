@@ -8,3 +8,5 @@ layout: page
 # [Development Software](platform)
 # [Course structure and content](structure)
 # [Hardware](hardware)
+
+The organisation https://github.com/control-systems-computer-networks has several example projects that have been built for the system under consideration.
