@@ -8,5 +8,6 @@ layout: default
 # [Development Software](platform)
 # [Course structure and content](structure)
 # [Hardware](hardware)
+# [Assessment](assessment)
 
 The organisation [https://github.com/control-systems-computer-networks](https://github.com/control-systems-computer-networks) has several example projects that have been built for the system under consideration.
