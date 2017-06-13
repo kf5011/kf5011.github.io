@@ -14,3 +14,9 @@ I liked the assessment strategy that  Dr Kevin Jacques (Lincoln) presented at th
 ## Intellectual / Professional skills & abilities:
 3.	Design, implement, test, document and evaluate a networked embedded control system
 4.	Apply software development tools and best practice to produce, test and debug software for small networked control systems using specifications for embedded devices and associated hardware
+
+## Criterion
+We have to break the learning outcomes down into the fine grained assessed criteria, then for each one write a statement of what constitutes a 3rd, 2:2, 2:1, and 1st demonstration of that criteria.
+
+| LO | Criteria | 3 | 2:2 | 2:1 | 1 |
+|----|----------|---|-----|-----|---|

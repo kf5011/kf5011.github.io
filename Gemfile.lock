@@ -200,6 +200,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  jekyll
   minima (~> 2.0)
   tzinfo-data
 
