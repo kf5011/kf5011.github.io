@@ -5,6 +5,12 @@ layout: default
 
 I liked the assessment strategy that  Dr Kevin Jacques (Lincoln) presented at the away day.  It is the kind of style of assessment I'd like to move towards, especially as the student numbers are going skywards.
 
+## Assessment format
+Experience with Small Embedded Systems has found that students like the practical assignment, and aren't fond of reports (much like myself).
+
+I propose to use a practical assignment as the main focus, and if necessary look at using the automatically marked questions in blackboard.
+
+
 # (draft) Learning Outcomes
 
 ## Knowledge & Understanding:
