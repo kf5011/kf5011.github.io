@@ -20,8 +20,10 @@ I didn't have any success with that, but the following comment I found in one di
 I've collected all the technical documentation and datasheets I can find.
 (I'll have to go back and find the urls)
 
-## FRDM K64F
+## ARM Cortex M4
+* [Cortex M4 Generic User Guide](docs\DUI0553A_cortex_m4_dgug.pdf)
 
+## FRDM K64F
 * [FRDM K64F User Guide](docs/FRDMK64FUG.pdf)
 * [K64F processor Reference Manual](docs/K64P144M120SF5RM.pdf)
 * [Accelerometer and Magnetometer](docs/FXOS8700CQ.pdf)
