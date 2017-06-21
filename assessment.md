@@ -3,7 +3,7 @@ layout: default
 ---
 # Assessment strategy
 
-I liked the assessment strategy that  Dr Kevin Jacques (Lincoln) presented at the away day.  It is the kind of style of assessment I'd like to move towards, especially as the student numbers are going skywards.
+I liked the assessment strategy that  Dr Kevin Jacques  (Lincoln) presented at the away day.  It is the kind of style of assessment I'd like to move towards, especially as the student numbers are going skywards.
 
 ## from the module descriptor
 ### Formative assessment and feedback
@@ -21,6 +21,14 @@ I propose to use a practical assignment as the main focus, and if necessary look
 
 
 # Learning Outcomes
+From Kevin's slides
+
+## Level 5 : Application
+* using and applying knoeledge
+* using problem solving methods
+* Manipulating
+* Designing
+* Experimenting
 
 ## Knowledge & Understanding:
 1.	Demonstrate knowledge and critical understanding of the interaction between physical systems, computer hardware and software, including control theories, network protocols, and cybersecurity architecture and operations
