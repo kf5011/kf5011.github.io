@@ -16,6 +16,18 @@ Most of the recommended solutions to turn off this feature involve setting a reg
 I didn't have any success with that, but the following comment I found in one discussion fixed the issue.  I now have my version of Windows 10 playing nicely with the board. (http://disq.us/p/15vrugs)
 > In recent versions of Windows 10, as well as the above, you need to stop the Storage Service too (type Services into the start menu to find the management applet)
 
+# If you do something silly
+> Like press the reset button while running a debugger.
+
+And end up with the red and green lights stuck on
+
+* [Recovering FRDM-K64F mbed Board]{https://mcuoneclipse.com/2014/04/19/recovering-frdm-k64f-mbed-board/}
+* [How to Recover the OpenSDA V2.x Bootloader]{https://mcuoneclipse.com/2016/06/26/how-to-recover-the-opensda-v2-x-bootloader/}
+* [Firmware FRDM K64F]{https://developer.mbed.org/handbook/Firmware-FRDM-K64F}
+* [Download – OpenSDA Bootloader and Application]{http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA#FRDM-K64F}
+* [OPENSDA: OpenSDA Serial and Debug Adapter]{http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA}
+
+
 # Documentation
 I've collected all the technical documentation and datasheets I can find.
 (I'll have to go back and find the urls)
