@@ -19,9 +19,9 @@ I didn't have any success with that, but the following comment I found in one di
 # If you do something silly
 > Like press the reset button while running a debugger.
 
-And end up with the red and green lights stuck on
+And end up with the red and green lights stuck on (need to detail the process)
 
-* [https://developer.mbed.org/handbook/Firmware-FRDM-K64F](https://developer.mbed.org/handbook/Firmware-FRDM-K64F)
+* [Firmware FRDM K64F](https://developer.mbed.org/handbook/Firmware-FRDM-K64F)
 * [Recovering FRDM-K64F mbed Board](https://mcuoneclipse.com/2014/04/19/recovering-frdm-k64f-mbed-board/)
 * [How to Recover the OpenSDA V2.x Bootloader](https://mcuoneclipse.com/2016/06/26/how-to-recover-the-opensda-v2-x-bootloader/)
 * [Firmware FRDM K64F](https://developer.mbed.org/handbook/Firmware-FRDM-K64F)
