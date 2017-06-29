@@ -21,11 +21,12 @@ I didn't have any success with that, but the following comment I found in one di
 
 And end up with the red and green lights stuck on
 
+* [https://developer.mbed.org/handbook/Firmware-FRDM-K64F](https://developer.mbed.org/handbook/Firmware-FRDM-K64F)
 * [Recovering FRDM-K64F mbed Board](https://mcuoneclipse.com/2014/04/19/recovering-frdm-k64f-mbed-board/)
 * [How to Recover the OpenSDA V2.x Bootloader](https://mcuoneclipse.com/2016/06/26/how-to-recover-the-opensda-v2-x-bootloader/)
 * [Firmware FRDM K64F](https://developer.mbed.org/handbook/Firmware-FRDM-K64F)
 * [Download – OpenSDA Bootloader and Application](http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA#FRDM-K64F)
-* [OPENSDA: OpenSDA Serial and Debug Adapter]{http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA}
+* [OPENSDA: OpenSDA Serial and Debug Adapter](http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA)
 
 
 # Documentation
