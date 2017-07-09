@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{typedef} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{portregisters}\PYG{p}{[}\PYG{l+m+mi}{16}\PYG{p}{];}\PYG{c+cm}{/* works but clunky */}
+\PYG{k}{typedef} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{registerbits}\PYG{p}{[}\PYG{l+m+mi}{32}\PYG{p}{];}
+\PYG{k}{typedef} \PYG{n}{registerbits} \PYG{n}{portbits}\PYG{p}{[}\PYG{l+m+mi}{16}\PYG{p}{];}
+\PYG{n}{portregisters} \PYG{o}{*}\PYG{n}{ports} \PYG{o}{=} \PYG{p}{(}\PYG{n}{portregisters}\PYG{o}{*}\PYG{p}{)(}\PYG{l+m+mh}{0x400FF000}\PYG{p}{);}
+\PYG{n}{portbits} \PYG{o}{*}\PYG{n}{bits} \PYG{o}{=} \PYG{p}{(}\PYG{n}{portbits}\PYG{o}{*}\PYG{p}{)(}\PYG{l+m+mh}{0x49FE0000}\PYG{p}{);}
+
+\PYG{n}{ports}\PYG{p}{[}\PYG{n}{PortB}\PYG{p}{][}\PYG{n}{Clear}\PYG{p}{];}
+\PYG{n}{bits}\PYG{p}{[}\PYG{n}{PortB}\PYG{p}{][}\PYG{n}{Clear}\PYG{p}{][}\PYG{l+m+mi}{22}\PYG{p}{];}
+\end{Verbatim}

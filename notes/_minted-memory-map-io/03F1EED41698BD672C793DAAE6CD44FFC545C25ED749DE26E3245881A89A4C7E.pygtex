@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{k+kt}{int} \PYG{o}{*}\PYG{n}{data}\PYG{p}{;} \PYG{c+cm}{/* pointer to an integer */}
+    \PYG{o}{*}\PYG{n}{data} \PYG{o}{=} \PYG{l+m+mi}{5}\PYG{p}{;} \PYG{c+cm}{/* write to address */}
+    \PYG{n}{data}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{;}    \PYG{c+cm}{/* pointer to the next integer */}
+\end{Verbatim}

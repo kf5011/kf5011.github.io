@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{n}{result} \PYG{o}{=} \PYG{n}{open}\PYG{p}{(}\PYG{n}{MajorNo}\PYG{p}{,} \PYG{n}{MinorNo}\PYG{p}{,} \PYG{n}{params}\PYG{p}{,} \PYG{n}{params}\PYG{p}{);}
+\end{Verbatim}

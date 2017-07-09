@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{bit} \PYG{o}{=} \PYG{n}{open}\PYG{p}{(}\PYG{n}{bitID}\PYG{p}{,} \PYG{l+s+sc}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}

@@ -17,3 +17,5 @@ The organisation [https://github.com/control-systems-computer-networks](https://
 [Module descriptor](KF5011 Computer Networks and Control Systems - PFNAModuleSpecification (AlunM, GE) Dec 2016.pdf)
 
 If you're interested I've distilled the [results](survey) of the module satisfaction survey for the last (2016/17) run of small embedded systems  
+
+# Some initial notes that may become lectures.

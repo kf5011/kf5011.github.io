@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{n}{data} \PYG{o}{=} \PYG{n}{modes}\PYG{p}{;}  \PYG{c+cm}{/* array name is a pointer */}
+    \PYG{n}{data}\PYG{p}{[}\PYG{l+m+mi}{6}\PYG{p}{]} \PYG{o}{=} \PYG{n}{modes}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{];} \PYG{c+cm}{/* pointers as arrays */}
+\end{Verbatim}

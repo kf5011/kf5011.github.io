@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{n}{open}\PYG{p}{(}\PYG{n}{device}\PYG{p}{,} \PYG{n}{mode}\PYG{p}{);}
+  \PYG{n}{read}\PYG{p}{(}\PYG{n}{device}\PYG{p}{);}
+  \PYG{n}{write}\PYG{p}{(}\PYG{n}{device}\PYG{p}{,} \PYG{n}{data}\PYG{p}{);}
+  \PYG{n}{close}\PYG{p}{(}\PYG{n}{device}\PYG{p}{);}
+\end{Verbatim}

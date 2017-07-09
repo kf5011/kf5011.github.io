@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{k+kt}{int} \PYG{n}{modes}\PYG{p}{[}\PYG{l+m+mi}{12}\PYG{p}{];}  \PYG{c+cm}{/* array of 12 integers */}
+    \PYG{n}{modes}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{];}       \PYG{c+cm}{/* 5th element (count from 0) */}
+\end{Verbatim}

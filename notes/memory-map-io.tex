@@ -1,0 +1,300 @@
+%&pdflatex
+\documentclass[xcolor=svgnames]{beamer}
+\usepackage[british]{babel}
+
+\usepackage{minted}
+\usepackage{inconsolata}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\usetheme[block=fill,progressbar=frametitle]{metropolis}
+\usepackage{lmodern}
+
+\usepackage{bytefield}
+
+\title{Control systems and Computer Networks}
+\subtitle{LEDs and Switches}
+
+\author{Dr Alun Moon}
+\date{Lecture 1}
+\begin{document}
+\frame{\maketitle}
+
+
+\begin{frame}{Memory mapped IO}
+\begin{itemize}
+    \item Access to hardware is via read/writes to addresses
+    \item Easier to build
+    \item easier instruction set
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{ARM}{Bit alias region}
+    \begin{itemize}
+        \item IO is via read/write to 32bit registers
+        \item alias region
+        \begin{itemize}
+            \item read and write to each 32bit word
+            \item reads and writes to each bit in the IO registers
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Port IO}
+    Each port has
+
+\begin{description}
+    \item[Data out] sets the output
+    \item[Set   ] writing 1 sets the output (sets to 1)
+    \item[Clear ] writing 1 clears the output (sets to 0)
+    \item[Toggle] writing 1 changes the output
+    \item[Input ] reads the input
+    \item[Direction] set the pin as output or input
+\end{description}
+
+\end{frame}
+
+\begin{frame}{Port Addresses}
+\begin{tabular}{rlrll}
+    Port & Base address & register & offset & action\\\toprule
+    Port A & 0x400FF000 & Data out & 0x00 & sets bits to 0 or 1\\
+                    &&    Set      & 0x04 & 1 set bit,\\
+                    &&&& 0 leaves bit unchanged \\
+                    &&    Clear    & 0x08 & 1 clears bit \\
+                    &&&& 0 leaves bit unchanged \\
+                    &&    Toggle   & 0x0C & 1 toggles bit \\
+                    &&&& 0 leaves bit unchanged \\
+                    &&    Input    & 0x10 & reads bit state\\
+                    &&   Direction & 0x14 & 1 is output, 0 is input \\\midrule
+    Port B & 0x400FF040\\
+    Port C & 0x400FF080\\
+    Port D & 0x400FF0C0\\
+    Port E & 0x400FF100\\
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{Endianness}
+
+\end{frame}
+
+\begin{frame}[fragile]{C arrays and pointers}
+Arrays and pointers in C have a close relationship;
+\begin{exampleblock}{Arrays}
+\begin{minted}{c}
+    int modes[12];  /* array of 12 integers */
+    modes[5];       /* 5th element (count from 0) */
+\end{minted}
+\end{exampleblock}
+\begin{exampleblock}{Pointers}
+\begin{minted}{c}
+    int *data; /* pointer to an integer */
+    *data = 5; /* write to address */
+    data+1;    /* pointer to the next integer */
+\end{minted}
+\end{exampleblock}
+\begin{exampleblock}{Arrays and Pointers}
+\begin{minted}{c}
+    data = modes;  /* array name is a pointer */
+    data[6] = modes[5]; /* pointers as arrays */
+\end{minted}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Layer model}
+
+\end{frame}
+\begin{frame}[fragile]{An API}
+    A device driver:
+    \begin{itemize}
+        \item opens and initialises a device for use
+        \item reads and writes data as appropriate
+        \item closes and shuts down the device
+    \end{itemize}
+    \begin{block}{C stdlib}
+        The C library has low level:
+        \texttt{open()}, \texttt{read()}, and \texttt{write()}\\
+        and higher level \texttt{putchar()}, \texttt{getchar()}, etc
+    \end{block}
+    An LED will have:
+    \begin{itemize}
+    \item as write
+    \begin{itemize}
+        \item turn on
+        \item turn off
+        \item toggle (change state)
+    \end{itemize}
+    \item as read (not really meaningful)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Major and minor device numbers}
+    Historically Uinx used \emph{major} and \emph{minor} device numbers:
+    \begin{block}{From Unix}
+    \begin{description}
+        \item[Major] number is the class of device, and looks up the functions (row in table)
+        \item[Minor] number is the identifier of that particular device
+    \end{description}
+    \end{block}
+
+    In practice the Major number is used as an index into a table of device drivers, and the minor number is passed as a parameter to the driver.
+
+\begin{exampleblock}{Example code}
+\begin{minted}{c}
+int read(unsigned int device)
+{
+    return devtable[major(device)].read(minor(device));
+}
+\end{minted}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{How to structure Device numbers}
+    \begin{itemize}
+        \item Possible elements are:
+        \begin{description}
+            \item[Device] LED, Port, Bit, etc
+            \item[ID] 0 \ldots 1
+            \item[Connection] Port and bit numbers
+        \end{description}
+        \item using groups of bytes,
+    \end{itemize}
+
+Major and minor numbers are unsigned 16bit numbers,\\
+ packed into 32bits.\\[1em]
+
+    \begin{bytefield}[endianness=big]{32}
+        \bitheader{0,7,8,15,16,23,24,31}\\
+    \bitboxes{16}{ {Major} {Minor}  }
+    \end{bytefield}
+\end{frame}
+
+\begin{frame}[fragile]{API design and semantics}
+    \begin{block}{We have to design the API, it should have the operations}
+    \begin{minted}{c}
+  open(device, mode);
+  read(device);
+  write(device, data);
+  close(device);
+\end{minted}
+    \end{block}
+We need to decide on data types and semantics
+\begin{alertblock}{Semantics}
+    Semantics describes the processes a computer follows when executing a program in that specific language.
+
+    In our case, how to interpret the values passed as parameters, and how to interpret the value returned by the function.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{API design and semantics : BIT}{Example semantics for bits}
+\begin{block}{\mintinline{c}{bit = open(bitID, 'r')}}
+Opens a bit for reading, the direction bit is set for input.
+\end{block}
+\begin{block}{\mintinline{c}{bit = open(bitID, 'w')}}
+Opens a bit for writing, the direction bit is set for output.
+\end{block}
+\begin{itemize}
+    \item The returned value can be the index into the table of internal addresses, or a negative number to signify an error.
+    \item The \alert{\texttt{bitID}} signifies which port and bit number to open.
+    \item The open function has to make sure the Port is also open.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{API design and semantics : BIT}{Example semantics for bits}
+    \begin{block}{\mintinline{c}{r = write(bit, value)}}
+    Writes to a bit, setting it to 1 or 0 as given by \alert{\texttt{value}}.
+    \begin{tabular}{rl}
+         0  & clear the bit \\
+        1  &set the bit\\
+         -1 & toggle, change the state of the bit
+    \end{tabular}\\
+      The \alert{\texttt{bit}} would be the ID returned by \texttt{open()}.  The return value signifies success or failure.
+\end{block}
+\begin{block}{\mintinline{c}{r = read(bit)}}
+    Reads from a bit.  The \alert{\texttt{bit}} would be the ID returned by \texttt{open()}.  The return value gives the value of the bit, 0 or 1.
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{API design and semantics : BIT}{Example semantics for LEDs}
+\begin{block}{\mintinline{c}{bit = open(ledID, 'w')}}
+Opens an LED.
+\end{block}
+\begin{itemize}
+    \item The \alert{\texttt{ledID}} signifies which LED to open.
+    \item The driver opens the appropriate bit for writing
+    \item It makes no sense to open an LED for reading!
+\end{itemize}
+\begin{block}{\mintinline{c}{r = write(led, value)}}
+Writes to an LED, setting it as given by \alert{\texttt{value}}.
+\begin{tabular}{rl}
+     0  & turn off the LED \\
+    1  &s turn on the LED \\
+     -1 & toggle, change the state of the LED  (flashing)
+\end{tabular}\\
+\end{block}
+\end{frame}
+
+\begin{frame}{Design of device numbers}
+\begin{exampleblock}{Ports and Bits}
+    In the FRDM-K64F often we have to write to a particular bit on a particular port.
+    The \alert{Bit-Alias} region allows access to individual bits.
+\end{exampleblock}
+\begin{block}{Device registers}
+    The FRDM-K64F has registers to: write, set, clear, toggle, and read bits
+\end{block}
+\end{frame}
+
+\begin{frame}{Semantics of operations}
+\begin{tabular}{lll}\toprule
+    Open & Port & assign clock signal to port, enabling port \\
+         & Other & opens the port device is attached to \\
+    \midrule
+    Write & Bits & 0 -- clear the bit \\
+          &      & 1 -- sets the bit \\
+          &      & -1 -- toggles the bit \\
+
+    \bottomrule
+\end{tabular}
+
+\end{frame}
+\newcommand{\hex}[1]{\mathtt{#1}_{\text{\tiny 16}}}
+\begin{frame}[fragile]{Bit-Alias Address Calculations}
+\begin{tabular}{ll}
+    Port base & $ \hex{000FF000} $ \\
+    Port & $ \hex{000FF000} + P\times \hex{40} = \hex{000FF000} + P \ll 6$ \\
+    P reg & $\hex{000FF000}+P\ll6+r\ll2$ \\
+    Bit offset & $ P_r  \times 32 + b\times4$ \\
+             & $ P_r \ll 5 + b\ll2$ \\
+             & $(\hex{FF000}+P\ll6+r\ll2)\ll5+b\ll2$ \\
+             & $\hex{FF000}\ll5+P\ll11+r\ll7+b\ll2$ \\
+\end{tabular}
+
+\begin{description}
+    \item[P] 0\ldots4  \texttt{100}
+    \item[r] 0\ldots5  \texttt{101}
+    \item[b] 0\dots31  \texttt{11111}
+\end{description}
+
+\begin{bytefield}[endianness=big]{32}
+    \bitheader{31,16,15,13,11,10,9,7,6,2}\\
+    \bitbox{16}{1FE} &
+    \bitbox{2}{00}& \bitbox{3}{Port} &
+    \bitbox{1}{0}&\bitbox{3}{r} &
+    \bitbox{5}{bit} &
+    \bitbox{2}{00}\\
+\end{bytefield}
+\end{frame}
+
+\begin{frame}{}
+
+\begin{itemize}
+    \item Use Macros in code for readbility
+    \item AWK script to calculate in parallel
+    \item AWK results used to create Unit tests
+\end{itemize}
+\end{frame}
+
+\end{document}
