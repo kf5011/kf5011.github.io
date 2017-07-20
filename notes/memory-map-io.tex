@@ -3,7 +3,9 @@
 \usepackage[british]{babel}
 
 \usepackage{minted}
-\usepackage{inconsolata}
+\usepackage{sourcecodepro}
+\usepackage[T1]{fontenc}
+
 \usepackage{tcolorbox}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -103,6 +105,68 @@ Arrays and pointers in C have a close relationship;
 \end{exampleblock}
 \end{frame}
 
+\begin{frame}[fragile]{Memory}
+    We can model the memory as an array of bytes
+    \begin{tcolorbox}
+        \begin{minted}{c}
+   uint8_t memory[SIZE];
+        \end{minted}
+    \end{tcolorbox}
+    The ARM is a 32bit architecture and so it may be more
+    convenient to model the memory as an array of 32bit words
+    \begin{tcolorbox}
+        \begin{minted}{c}
+   uint32_t wordmemory[SIZE/4];
+        \end{minted}
+    \end{tcolorbox}
+
+\end{frame}
+
+\begin{frame}[fragile]{Pointer Arithmetic}
+Given
+\begin{minted}{c}
+    uint32_t *word;
+\end{minted}
+Then\\
+\begin{tabular}{ll}
+    \mintinline{c}{word} & is an address aligned to 4 bytes \\
+    \mintinline{c}{*word} & is an unsigned 32 bit integer at that address \\
+    \mintinline{c}{word+1} & is the address of the \emph{next} integer, \alert{4 bytes on} \\
+    \mintinline{c}{*(word+1)} & is the \alert{next} 32 bit integer\\
+    \mintinline{c}{word[0]} & is the integer \alert{at} the address in \mintinline{c}{word}\\
+    \mintinline{c}{word[1]} & is the next integer (at \mintinline{c}{word+1})
+\end{tabular}
+Pointer arithmetic (and arrays) take into account the \emph{size} of the thing pointer to.
+
+\begin{exampleblock}{See also}
+    the \mintinline{c}{sizeof} compile time operator
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{An initial model}
+    We can have an initial model, thinking of the I/O memory as an array of words.
+
+    \begin{tcolorbox}
+        \begin{minted}{c}
+enum registers {
+    Output,Set,Clear,Toggle,Input,Direction
+};
+uint32_t *PortB = (uint32_t*)0x400FF00;
+        \end{minted}
+    \end{tcolorbox}
+
+    The ports registers are now simply array access
+
+    \begin{tcolorbox}
+        \begin{minted}{c}
+    PortB[Direction] |= 1<<22;
+        \end{minted}
+    \end{tcolorbox}
+    Sets bit 22 in Port-B's direction register.
+\end{frame}
+\end{document}
+
+%%%%======================
 \begin{frame}{Layer model}
 
 \end{frame}
@@ -129,6 +193,24 @@ Arrays and pointers in C have a close relationship;
     \item as read (not really meaningful)
 \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]{Operation}
+    \begin{itemize}
+        \item We can access individual bits through the Bit-alias region.
+        \item We can have an array of ponters, for each LED, for each function
+        \item We can have an array of arrays, one row for each LED.
+        \item We'll have to de-reference the pointers to read and write the bits.
+    \end{itemize}
+
+    \begin{exampleblock}{}
+        \begin{minted}{c}
+   uint32_t *LEDregisters[8]; /* 8 pointers for LED control */
+   uint32_t  *LEDs[3][8];     /* 3 arrays of 8 pointers     */
+        \end{minted}
+    \end{exampleblock}
+
+\end{frame}
+
 
 \begin{frame}[fragile]{Major and minor device numbers}
     Historically Uinx used \emph{major} and \emph{minor} device numbers:
@@ -296,5 +378,3 @@ Writes to an LED, setting it as given by \alert{\texttt{value}}.
     \item AWK results used to create Unit tests
 \end{itemize}
 \end{frame}
-
-\end{document}
