@@ -24,7 +24,7 @@ I propose to use a practical assignment as the main focus, and if necessary look
 From Kevin's slides
 
 ## Level 5 : Application
-* using and applying knoeledge
+* using and applying knowledge
 * using problem solving methods
 * Manipulating
 * Designing
