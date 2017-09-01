@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kt}{int} \PYG{n+nf}{read}\PYG{p}{(}\PYG{k+kt}{unsigned} \PYG{k+kt}{int} \PYG{n}{device}\PYG{p}{)}
-\PYG{p}{\PYGZob{}}
-    \PYG{k}{return} \PYG{n}{devtable}\PYG{p}{[}\PYG{n}{major}\PYG{p}{(}\PYG{n}{device}\PYG{p}{)].}\PYG{n}{read}\PYG{p}{(}\PYG{n}{minor}\PYG{p}{(}\PYG{n}{device}\PYG{p}{));}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

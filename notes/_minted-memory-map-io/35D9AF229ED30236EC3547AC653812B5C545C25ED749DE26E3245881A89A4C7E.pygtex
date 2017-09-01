@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{r} \PYG{o}{=} \PYG{n}{write}\PYG{p}{(}\PYG{n}{led}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}
-\end{Verbatim}

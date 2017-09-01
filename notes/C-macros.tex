@@ -1,0 +1,90 @@
+%&pdflatex
+\documentclass[xcolor=svgnames]{beamer}
+\usepackage[british]{babel}
+
+\usepackage{minted}
+\usepackage{sourcecodepro}
+\usepackage[T1]{fontenc}
+
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\usetheme[block=fill,progressbar=frametitle]{metropolis}
+\usepackage{lmodern}
+
+\usepackage{bytefield}
+
+\title{Control systems and Computer Networks}
+\subtitle{The C pre-processor \& C Macros}
+
+\author{Dr Alun Moon}
+\date{Lecture 1.c}
+\begin{document}
+\frame{\maketitle}
+
+\begin{frame}{The C Pre-Processor}
+The C pre-processor has been a part of the C standard since the beginning of C.
+
+It acts to transform the source code according to it's rules, prior to the modified code being fed to the compiler.
+
+\begin{alertblock}{Note Well}
+    This is a \alert{modification} of the source code.  The Compiler will report errors in the code \alert{after} the pre-processor has modified the code
+\end{alertblock}
+
+Errors introduced via the pre-processor can be \alert{\emph{\textbf{very} hard}} to debug!
+\end{frame}
+
+\begin{frame}{Syntax}
+The syntax is very simple,
+\begin{enumerate}
+    \item lines beginning with a hash character \alert{\#} are pre-processor directives
+    \item tokens are split using white-space
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]{Includes}
+\begin{tcolorbox}
+\begin{minted}{c}
+#include <stdio.h>
+#include "library.h"
+\end{minted}
+\end{tcolorbox}
+
+The \mintinline{c}{#include} directive \alert{\emph{copies in}} the file given, at that point in the source code.
+
+By convention these files are given the \texttt{.h} suffix, and are called \alert{\emph{header files}}
+
+Files are searched for using two rules given by the kind of quotes used
+\begin{itemize}
+    \item[\texttt{<>}] looks for standard header files in a system defined place (the include-path)
+    \item[\texttt{""}] looks for files in the same directory as the original source code
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Define}{Simple version}
+\begin{tcolorbox}
+\begin{minted}[frame=leftline]{c}
+#define BUFFSIZE 1024
+#define pi 3.141592654
+\end{minted}
+\end{tcolorbox}
+
+The simple version of \mintinline{c}{#define} creates a token and a \alert{\emph{textual}} substitution
+
+Where the pre-processor finds a matching token in the source code, it is replaced with the text.
+
+\begin{tabular}{l@{$\rightarrow$}l}
+\mintinline{c}{char inputbuffer[BUFFSIZE];}%
+&
+\mintinline{c}{char inputbuffer[1024];}
+\\
+\mintinline{c}{A = pi*r*r} & \mintinline{c}{A = 3.141592654*r*r}\\
+\end{tabular}
+
+\end{frame}
+
+\end{document}
+%%%%======================

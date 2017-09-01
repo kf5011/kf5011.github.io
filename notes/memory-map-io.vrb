@@ -1,25 +1,13 @@
-\frametitle{Bit-Alias Address Calculations}
-\begin{tabular}{ll}
-    Port base & $ \hex{000FF000} $ \\
-    Port & $ \hex{000FF000} + P\times \hex{40} = \hex{000FF000} + P \ll 6$ \\
-    P reg & $\hex{000FF000}+P\ll6+r\ll2$ \\
-    Bit offset & $ P_r  \times 32 + b\times4$ \\
-             & $ P_r \ll 5 + b\ll2$ \\
-             & $(\hex{FF000}+P\ll6+r\ll2)\ll5+b\ll2$ \\
-             & $\hex{FF000}\ll5+P\ll11+r\ll7+b\ll2$ \\
-\end{tabular}
-
-\begin{description}
-    \item[P] 0\ldots4  \texttt{100}
-    \item[r] 0\ldots5  \texttt{101}
-    \item[b] 0\dots31  \texttt{11111}
-\end{description}
-
-\begin{bytefield}[endianness=big]{32}
-    \bitheader{31,16,15,13,11,10,9,7,6,2}\\
-    \bitbox{16}{1FE} &
-    \bitbox{2}{00}& \bitbox{3}{Port} &
-    \bitbox{1}{0}&\bitbox{3}{r} &
-    \bitbox{5}{bit} &
-    \bitbox{2}{00}\\
-\end{bytefield}
+\frametitle{Complex declarations}
+The complete declaration for a memory mapped I/O register is something like.
+    \begin{tcolorbox}
+        \begin{minted}{c}
+volatile uint32_t *const IOmap;
+        \end{minted}
+    \end{tcolorbox}
+    Which reads as\ldots
+    \mintinline{c}{IOmap} is a \alert{Constant} \alert{Pointer} to an \alert{unsigned 32 bit integer} which is \alert{Volatile}
+    \begin{description}
+        \item[Constant pointer] the value of the pointer (address) is constant
+        \item[Volatile] tells the compiler that the value at the address may change, so always fetch the value from memory.
+    \end{description}

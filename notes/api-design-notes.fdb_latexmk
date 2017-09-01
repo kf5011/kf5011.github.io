@@ -1,10 +1,10 @@
 # Fdb version 3
-["bibtex api-design-notes"] 1499619605 "api-design-notes.aux" "api-design-notes.bbl" "api-design-notes" 1499619608
+["bibtex api-design-notes"] 1499619605 "api-design-notes.aux" "api-design-notes.bbl" "api-design-notes" 1503507482
   "api-design-notes.aux" 1499619607 2260 056909a939ffca7c7c2982289652ce22 ""
   (generated)
   "api-design-notes.blg"
   "api-design-notes.bbl"
-["pdflatex"] 1499619605 "api-design-notes.tex" "api-design-notes.pdf" "api-design-notes" 1499619608
+["pdflatex"] 1499619605 "api-design-notes.tex" "api-design-notes.pdf" "api-design-notes" 1503507482
   "_minted-api-design-notes/065AF39EF603E257C80DFE9B322815277D1FCAE8ABBED858B594CEC250F458DD.pygtex" 1499619371 214 67e80af5122ee90f8469a532df71665f ""
   "_minted-api-design-notes/205691E32DC61A41A0DD822FEAF451787D1FCAE8ABBED858B594CEC250F458DD.pygtex" 1499619372 199 e1f142a33d1288e64f3237f2fbf7ef5c ""
   "_minted-api-design-notes/C028D4D40C293190C7FD4527ECA3D54C7D1FCAE8ABBED858B594CEC250F458DD.pygtex" 1499446021 854 db1f648b546a16cfb757cdacbd06474e ""
@@ -15,7 +15,7 @@
   "api-design-notes.bbl" 1499619605 0 d41d8cd98f00b204e9800998ecf8427e "bibtex api-design-notes"
   "api-design-notes.out" 1499619607 515 6f5381530bfdf5f4949ed27a63e91fcd ""
   "api-design-notes.pyg" 0 -1 0 ""
-  "api-design-notes.tex" 1499619600 3570 55b2c99002577a75e363c2b61aa11bd4 ""
+  "api-design-notes.tex" 1503507480 3570 55b2c99002577a75e363c2b61aa11bd4 ""
   "d:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc" 1494416115 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "d:/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1494416346 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "d:/texlive/2016/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm" 1494417268 2796 d37c29814a6717720ee1a7c9a0b2c3b8 ""
@@ -218,8 +218,8 @@
   "d:/texlive/2016/texmf.cnf" 1494418984 673 4ae7b2f49cee444c5343a45b5d0f169c ""
   "nul:.tex" 0 -1 0 ""
   (generated)
-  "api-design-notes.log"
-  "api-design-notes.pyg"
-  "api-design-notes.out"
-  "api-design-notes.pdf"
   "api-design-notes.aux"
+  "api-design-notes.pyg"
+  "api-design-notes.log"
+  "api-design-notes.pdf"
+  "api-design-notes.out"
