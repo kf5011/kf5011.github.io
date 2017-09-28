@@ -1,10 +1,9 @@
-%&pdflatex
+%&xelatex
 \documentclass[xcolor=svgnames]{beamer}
 \usepackage[british]{babel}
+\usepackage[T1]{fontenc}
 
 \usepackage{minted}
-\usepackage{sourcecodepro}
-\usepackage[T1]{fontenc}
 
 \usepackage{tcolorbox}
 \usepackage{graphicx}
@@ -45,55 +44,19 @@
 
 \end{frame}
 
-\begin{frame}{Port IO}
-    Each port has
-
-\begin{description}
-    \item[Data out] sets the output
-    \item[Set   ] writing 1 sets the output (sets to 1)
-    \item[Clear ] writing 1 clears the output (sets to 0)
-    \item[Toggle] writing 1 changes the output
-    \item[Input ] reads the input
-    \item[Direction] set the pin as output or input
-\end{description}
-
-\end{frame}
-
-\begin{frame}{Port Addresses}
-\begin{tabular}{rlrll}
-    Port & Base address & register & offset & action\\\toprule
-    Port A & 0x400FF000 & Data out & 0x00 & sets bits to 0 or 1\\
-                    &&    Set      & 0x04 & 1 set bit,\\
-                    &&&& 0 leaves bit unchanged \\
-                    &&    Clear    & 0x08 & 1 clears bit \\
-                    &&&& 0 leaves bit unchanged \\
-                    &&    Toggle   & 0x0C & 1 toggles bit \\
-                    &&&& 0 leaves bit unchanged \\
-                    &&    Input    & 0x10 & reads bit state\\
-                    &&   Direction & 0x14 & 1 is output, 0 is input \\\midrule
-    Port B & 0x400FF040\\
-    Port C & 0x400FF080\\
-    Port D & 0x400FF0C0\\
-    Port E & 0x400FF100\\
-    \end{tabular}
-\end{frame}
-
-\begin{frame}{Endianness}
-    Arrangement of bytes in a multi-byte value (4 bytes in a 32 bit integer)
-\begin{description}
-    \item[Big Endian] Most significant bytes come first in memory
-    \item[Little Endian] Least significant bytes come first in memory
-\end{description}
-The ARM is \alert{Little} Endian
-\begin{exampleblock}{For register/32bit integer at address \alert{\texttt{400FF004}}}
-\begin{tabular}{lrr@{~--~}r}
-Address & byte & \multicolumn{2}{c}{bits}\\
-0x400FF004 &  0 &  0 & 7 \\
-0x400FF005 &  1 &  8 & 15 \\
-0x400FF006 &  2 &  16 & 23 \\
-0x400FF007 &  3 &  24 & 31 \\
-\end{tabular}
-\end{exampleblock}
+\begin{frame}[fragile]{Complex declarations}
+    The complete declaration for a memory mapped I/O register is something like.
+    \begin{tcolorbox}
+        \begin{minted}{c}
+volatile uint32_t *const IOmap;
+        \end{minted}
+    \end{tcolorbox}
+    Which reads as\ldots
+    \mintinline{c}{IOmap} is a \alert{Constant} \alert{Pointer} to an \alert{unsigned 32 bit integer} which is \alert{Volatile}
+    \begin{description}
+        \item[Constant pointer] the value of the pointer (address) is constant
+        \item[Volatile] tells the compiler that the value at the address may change, so always fetch the value from memory.
+    \end{description}
 \end{frame}
 
 \begin{frame}[fragile]{C arrays and pointers}
@@ -157,6 +120,62 @@ Pointer arithmetic (and arrays) take into account the \emph{size} of the thing p
 \end{exampleblock}
 \end{frame}
 
+
+\part{GPIO}
+\frame\partpage
+
+\begin{frame}{Port IO}
+    Each port has
+
+\begin{description}
+    \item[Data out] sets the output
+    \item[Set   ] writing 1 sets the output (sets to 1)
+    \item[Clear ] writing 1 clears the output (sets to 0)
+    \item[Toggle] writing 1 changes the output
+    \item[Input ] reads the input
+    \item[Direction] set the pin as output or input
+\end{description}
+
+\end{frame}
+
+\begin{frame}{Port Addresses}
+\begin{tabular}{rlrll}
+    Port & Base address & register & offset & action\\\toprule
+    Port A & 0x400FF000 & Data out & 0x00 & sets bits to 0 or 1\\
+                    &&    Set      & 0x04 & 1 set bit,\\
+                    &&&& 0 leaves bit unchanged \\
+                    &&    Clear    & 0x08 & 1 clears bit \\
+                    &&&& 0 leaves bit unchanged \\
+                    &&    Toggle   & 0x0C & 1 toggles bit \\
+                    &&&& 0 leaves bit unchanged \\
+                    &&    Input    & 0x10 & reads bit state\\
+                    &&   Direction & 0x14 & 1 is output, 0 is input \\\midrule
+    Port B & 0x400FF040\\
+    Port C & 0x400FF080\\
+    Port D & 0x400FF0C0\\
+    Port E & 0x400FF100\\
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{Endianness}
+    Arrangement of bytes in a multi-byte value (4 bytes in a 32 bit integer)
+\begin{description}
+    \item[Big Endian] Most significant bytes come first in memory
+    \item[Little Endian] Least significant bytes come first in memory
+\end{description}
+The ARM is \alert{Little} Endian
+\begin{exampleblock}{For register/32bit integer at address \alert{\texttt{400FF004}}}
+\begin{tabular}{lrr@{~--~}r}
+Address & byte & \multicolumn{2}{c}{bits}\\
+0x400FF004 &  0 &  0 & 7 \\
+0x400FF005 &  1 &  8 & 15 \\
+0x400FF006 &  2 &  16 & 23 \\
+0x400FF007 &  3 &  24 & 31 \\
+\end{tabular}
+\end{exampleblock}
+\end{frame}
+
+
 \begin{frame}[fragile]{An initial model}
     We can have an initial model, thinking of the I/O memory as an array of words.
 
@@ -179,20 +198,6 @@ uint32_t *PortB = (uint32_t*)0x400FF00;
     Sets bit 22 in Port-B's direction register.
 \end{frame}
 
-\begin{frame}[fragile]{Complex declarations}
-    The complete declaration for a memory mapped I/O register is something like.
-    \begin{tcolorbox}
-        \begin{minted}{c}
-volatile uint32_t *const IOmap;
-        \end{minted}
-    \end{tcolorbox}
-    Which reads as\ldots
-    \mintinline{c}{IOmap} is a \alert{Constant} \alert{Pointer} to an \alert{unsigned 32 bit integer} which is \alert{Volatile}
-    \begin{description}
-        \item[Constant pointer] the value of the pointer (address) is constant
-        \item[Volatile] tells the compiler that the value at the address may change, so always fetch the value from memory.
-    \end{description}
-\end{frame}
 
 
 \end{document}
