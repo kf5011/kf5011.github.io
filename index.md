@@ -19,3 +19,6 @@ The organisation [https://github.com/control-systems-computer-networks](https://
 If you're interested I've distilled the [results](survey) of the module satisfaction survey for the last (2016/17) run of small embedded systems  
 
 # Some initial notes that may become lectures.
+{% for repository in site.github.public_repositories %}
+  * [{{ repository.name }}]({{ repository.html_url }})
+{% endfor %}
