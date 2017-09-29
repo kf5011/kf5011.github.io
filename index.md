@@ -20,5 +20,5 @@ If you're interested I've distilled the [results](survey) of the module satisfac
 
 # Some initial notes that may become lectures.
 {% for repository in site.github.public_repositories %}
-  * [{{ repository.name }}]({{ repository.html_url }})
+  * [{{ repository.name }}]({{ repository.html_url }}) {{ repository.project_tagline }}
 {% endfor %}
