@@ -34,7 +34,8 @@ I've collected all the technical documentation and datasheets I can find.
 (I'll have to go back and find the urls)
 
 ## ARM Cortex M4
-* [Cortex M4 Generic User Guide](docs\DUI0553A_cortex_m4_dgug.pdf)
+* [Cortex M4 Generic User Guide](docs/DUI0553A_cortex_m4_dgug.pdf)
+* [Cortex M4 Technical Reference Manual](docs/DDI0439B_cortex_m4_r0p0_trm.pdf)
 
 ## FRDM K64F
 * [FRDM K64F User Guide](docs/FRDMK64FUG.pdf)
