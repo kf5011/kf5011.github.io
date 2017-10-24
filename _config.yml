@@ -27,7 +27,6 @@ markdown: kramdown
 kramdown:
     input: GFM
 theme: jekyll-theme-slate
-gems:
 exclude:
   - Gemfile
   - Gemfile.lock
