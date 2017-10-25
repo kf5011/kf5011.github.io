@@ -23,10 +23,10 @@ The exercises for the practical sessions and the base skeleton for the assignmen
 ## Lab material
 Lab material will be distributed via public repositories, linked to from the module pages.  While you can download a .zip file containing the source, or clone the public repository, a better option is to fork the repository (which requires a Github account).
 
-![Github page](images/github-page.png)
+![Github page](images/github-page.png){: style="width:45em" }
 
 # Forking a repository
-Look for the fork button ![fork button](images/fork-button.png) near the top right of the page.  _You will need to be signed into your gitub account_
+Look for the fork button ![fork button](images/fork-button.png){: style="height:18px"} near the top right of the page.  _You will need to be signed into your gitub account_
 
 Creating a fork, makes a copy of the repository under your id, you can then make changes to your copy, and log them back onto github servers.
 
@@ -41,7 +41,7 @@ Making a clone of the repository, makes a local copy of the files that you can w
 
 To clone the repository click on the green
 
-![git clone](images/clone-repro.png)
+![git clone](images/clone-repro.png){: style="width:70%"}
 
    ````shell_session
     $ git clone https://github.com/control-systems-computer-networks/simple-serial
