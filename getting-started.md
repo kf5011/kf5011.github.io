@@ -23,10 +23,10 @@ The exercises for the practical sessions and the base skeleton for the assignmen
 ## Lab material
 Lab material will be distributed via public repositories, linked to from the module pages.  While you can download a .zip file containing the source, or clone the public repository, a better option is to fork the repository (which requires a Github account).
 
-![Github page](images/github-page.png){: style="width:45em" }
+![Github page](images/github-page.png){: width='650' }
 
 # Forking a repository
-Look for the fork button ![fork button](images/fork-button.png){: style="height:18px"} near the top right of the page.  _You will need to be signed into your gitub account_
+Look for the fork button ![fork button](images/fork-button.png) near the top right of the page.  _You will need to be signed into your gitub account_
 
 Creating a fork, makes a copy of the repository under your id, you can then make changes to your copy, and log them back onto github servers.
 
@@ -39,10 +39,26 @@ Creating a fork, makes a copy of the repository under your id, you can then make
 # Cloning the repository
 Making a clone of the repository, makes a local copy of the files that you can work on.  Although there are some good GUI based tools, personally I've found that the command shell tool the most convenient for this stage.
 
-To clone the repository click on the green
+To clone the repository click on the green "Clone or download" button
+![git clone](images/clone-button.png)  You will see a drop down box with a url and a copy icon.
 
-![git clone](images/clone-repro.png){: style="width:70%"}
+![git clone](images/clone-button-url.png)
 
-   ````shell_session
+You can pset the url into the command line for the `git clone` command
+
+   ```shell_session
     $ git clone https://github.com/control-systems-computer-networks/simple-serial
    ```
+
+If it clones sucessfully you'll see something like
+
+   ```shell_session
+   $ git clone https://github.com/control-systems-computer-networks/simple-serial
+   Cloning into 'simple-serial'...
+   remote: Counting objects: 17, done.
+   remote: Total 17 (delta 0), reused 0 (delta 0), pack-reused 17
+   Unpacking objects: 100% (17/17), done.
+   $
+   ```
+
+You can now open the folder that has just been created in Atom through the "Add Project Folder" command.
