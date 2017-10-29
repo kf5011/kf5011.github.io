@@ -49,6 +49,7 @@ I've collected all the technical documentation and datasheets I can find.
 * [Board Schematic](docs/ApplicationShield V_1_0_0 SCH.pdf)
 * [Board PCB layout](docs/ApplicationShield V_1_0_0 BRD.pdf)
 * [LCD Datasheet](docs/NHD-C12832A1Z-FSW-FBW-3V3.pdf)
+* [LCD Driver (ST7565R) Datasheet](docs/st7565r.pdf)
 * [5-way switch](docs/SKRH Series - Basic information.pdf)
 * [RGB led datasheet](docs/CLV1AFKB(874).pdf)
 * [Accelerometer](docs/MMA7660FC.pdf)
