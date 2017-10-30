@@ -14,7 +14,7 @@ layout: default
 
  * [Getting Started](getting-started)
  
-The organisation [https://github.com/control-systems-computer-networks](https://github.com/control-systems-computer-networks) has several example projects that have been built for the system under consideration.
+The organisation [https://github.com/KF5011](https://github.com/KF5011) has several example projects that have been built for the system under consideration.
 
 [Module descriptor](KF5011.2016.pdf)
 
