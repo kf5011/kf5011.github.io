@@ -47,13 +47,13 @@ To clone the repository click on the green "Clone or download" button
 You can pset the url into the command line for the `git clone` command
 
    ```shell_session
-    $ git clone https://github.com/control-systems-computer-networks/simple-serial
+    $ git clone https://github.com/kf5011/simple-serial.git
    ```
 
 If it clones sucessfully you'll see something like
 
    ```shell_session
-   $ git clone https://github.com/control-systems-computer-networks/simple-serial
+   $ git clone https://github.com/kf5011/simple-serial.git
    Cloning into 'simple-serial'...
    remote: Counting objects: 17, done.
    remote: Total 17 (delta 0), reused 0 (delta 0), pack-reused 17
