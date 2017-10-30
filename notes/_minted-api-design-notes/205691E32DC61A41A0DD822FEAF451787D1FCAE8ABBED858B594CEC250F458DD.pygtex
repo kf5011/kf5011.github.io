@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-    \PYG{n}{result} \PYG{o}{=} \PYG{n}{dev\PYGZus{}open}\PYG{p}{(}\PYG{n}{MinorNo}\PYG{p}{,} \PYG{n}{params}\PYG{p}{,} \PYG{n}{params}\PYG{p}{);}
-\end{Verbatim}
