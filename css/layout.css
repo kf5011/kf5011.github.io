@@ -1,13 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@import url('https://fonts.googleapis.com/css?family=Anonymous+Pro');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 html {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 
+code {
+    font-family: 'Inconsolata', sans-serif;
+}
 pre {
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Inconsolata', monospace;
+}
+
+body {
+    margin-left: 2em;
 }
 
 .alert {
@@ -17,20 +26,16 @@ pre {
     padding-left: 0.5em;
     overflow: auto;
 }
-.processing { border-color: hsl(206, 100%, 15%); }
+.code { border-color: hsl(196, 100%, 33%); }
 .example    { border-color: hsl(175,98%,23%); }
 .note       { border-color: hsl(204,30%,51%); }
 .warning    { border-color: hsl(29,100%,50%); }
 .danger     { border-color: hsl(351,100%,45%); }
-.question   { border-color: rgb(0, 191, 255); }
+.question   { border-color: hsl(180, 100%, 40%); }
 
 section {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-}
-
-code {
-    font-family: 'Source Code Pro', sans-serif;
 }
 
 dt {

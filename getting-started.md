@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: seminar
 ---
 # Getting started
 This is a quick guide to getting started using [Git](https://github.com), [Atom](https://atom.io), and [PlatformIO](https://platformio.org), in the context of this module.
@@ -49,6 +49,7 @@ You can pset the url into the command line for the `git clone` command
    ```shell_session
     $ git clone https://github.com/kf5011/simple-serial.git
    ```
+   {: .alert .code}
 
 If it clones sucessfully you'll see something like
 
@@ -62,3 +63,18 @@ If it clones sucessfully you'll see something like
    ```
 
 You can now open the folder that has just been created in Atom through the "Add Project Folder" command.
+
+Some example
+{: .alert .example}
+
+Some note
+{: .alert .note}
+
+Some warning
+{: .alert .warning}
+
+Some damger
+{: .alert .danger}
+
+Some question
+{: .alert .question}
