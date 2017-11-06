@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Hardware
 ---
 
 # FRDM K64F

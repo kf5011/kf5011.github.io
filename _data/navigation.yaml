@@ -1,0 +1,27 @@
+pages:
+    - title: Home
+      url: index.html
+
+    - title: You need
+      url: You-will-need.html
+
+    - title: Getting started
+      url: getting-started.html
+
+    - title: Hardware
+      url: hardware.html
+
+    - title: Software platform
+      url: platform.html
+
+    - title: Books
+      url: books.html
+
+    - title: Course Structure
+      url: structure.html
+
+    - title: Assesment plan
+      url: assesement.html
+
+    - title: Student feedback
+      url: survey.html

@@ -1,8 +1,9 @@
 ---
 layout: default
+title: Reading list
 ---
 
-# reading list
+# Reading list
 Some suggested texts:
 
 * Lee & Varaiya _Structure and Interpretation of Signals and Systems_ [http://leevaraiya.org/](http://leevaraiya.org/)

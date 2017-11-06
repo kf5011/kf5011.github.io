@@ -4,11 +4,22 @@
     <link href="css/layout.css" rel="stylesheet" >
 </head>
 <body>
+    <header>
+        <nav>
+        <ul><li>&#x2630;</li>
+        {% for item in site.data.navigation.pages %}
+        <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+        </ul>
+    </nav>
+        <H1>{{page.title}}</h1>
+    </header>
+
     {{content}}
 <hr />
 <address>
     Dr Alun Moon <br />
-    <a href="mailto:alun.moon@northumbria.ac.uk?subject=feedback%20control%20%26%20networks">
+    <a href="mailto:alun.moon@northumbria.ac.uk?subject=feedback%20code%20wrangling">
     alun.moon@northumbria.ac.uk
     </a>
 </address>

@@ -1,5 +1,6 @@
 ---
 layout: seminar
+title: Getting started
 ---
 # Getting started
 This is a quick guide to getting started using [Git](https://github.com), [Atom](https://atom.io), and [PlatformIO](https://platformio.org), in the context of this module.
@@ -9,7 +10,7 @@ The basic pattern for the lab classes, and ultimately the assignment, is:
 
  1. [Fork](#forking-a-repository) the repository on Github.
  2. [Clone](#cloning-the-repository) the repository on the local machine.
- 3. Work on the project
+ 3. [Work](#working-on-the-project) on the project
     1. Edit
     2. Compile
     3. Upload
@@ -61,20 +62,24 @@ If it clones sucessfully you'll see something like
    Unpacking objects: 100% (17/17), done.
    $
    ```
+   {: .alert .example}
 
 You can now open the folder that has just been created in Atom through the "Add Project Folder" command.
 
-Some example
+> On my machine since I am already in the command shell I
+> just type
+>   ```shell_session
+>   $ atom simple-serial
+>   ```
+>   {: .alert .code}
+>
+> or something like
+>   ```shell_session
+>   $ cd simple-serial
+>   $ atom .
+>   ```
+>   {: .alert .code}
 {: .alert .example}
 
-Some note
-{: .alert .note}
-
-Some warning
-{: .alert .warning}
-
-Some damger
-{: .alert .danger}
-
-Some question
-{: .alert .question}
+# Working on the Project
+[Atom](https://atom.io) and [PlatformIO](http://platformio.org/) provide a good environment for writing program code.
