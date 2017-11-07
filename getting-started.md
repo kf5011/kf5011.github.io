@@ -83,3 +83,13 @@ You can now open the folder that has just been created in Atom through the "Add 
 
 # Working on the Project
 [Atom](https://atom.io) and [PlatformIO](http://platformio.org/) provide a good environment for writing program code.
+
+![Atom](images/atom.png)
+
+![Atom](images/atom-build.png)
+
+![Atom](images/atom-upload.png)
+
+![Atom](images/atom-serial.png)
+
+![Atom](images/atom-serial-monitor.png)
