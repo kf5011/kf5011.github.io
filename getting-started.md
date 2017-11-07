@@ -11,7 +11,7 @@ The basic pattern for the lab classes, and ultimately the assignment, is:
  1. [Fork](#forking-a-repository) the repository on Github.
  2. [Clone](#cloning-the-repository) the repository on the local machine.
  3. [Work](#working-on-the-project) on the project
-    1. Edit
+    1. [Edit](#editing)
     2. Compile
     3. Upload
     4. Evaluate
@@ -86,9 +86,19 @@ You can now open the folder that has just been created in Atom through the "Add 
 
 ![Atom](images/atom.png)
 
-![Atom](images/atom-build.png)
+![Atom](images/atom-build.png){: style="float:left; margin-right:1em"}
+## Editing
+The code can be edited and saved just as with any editor (it's just text after all)
 
-![Atom](images/atom-upload.png)
+## Building
+The build button on the toolbar, launches the build process.  The status and progression of the build is seen in another smaller sub-window.
+
+For the first run of the build, this can take time as the process may have to download and compile libraries and tools used.
+
+{: style="clear:both"}
+
+![Atom](images/atom-upload.png){: style="float:left; margin-right:1em"}
+## Uploading
 
 ![Atom](images/atom-serial.png)
 
