@@ -93,3 +93,6 @@ You can now open the folder that has just been created in Atom through the "Add 
 ![Atom](images/atom-serial.png)
 
 ![Atom](images/atom-serial-monitor.png)
+
+
+sudo adduser student dialout
