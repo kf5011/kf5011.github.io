@@ -3,7 +3,7 @@ layout: seminar
 title: Getting started
 ---
 # Getting started
-This is a quick guide to getting started using [Git](https://github.com), [Atom](https://atom.io), and [PlatformIO](https://platformio.org), in the context of this module.
+This is a quick guide to getting started using [Git](https://github.com), [Atom](https://atom.io), and [PlatformIO](http://platformio.org), in the context of this module.
 
 # Workflow
 The basic pattern for the lab classes, and ultimately the assignment, is:
