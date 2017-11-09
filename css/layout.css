@@ -53,6 +53,7 @@ margin: 0px 0px 0px -2em;
     padding-left: 2em;
     padding-top: 10px;
     padding-bottom: 0.5em;
+    width: 100%;
 }
 
 header nav ul {
@@ -72,4 +73,15 @@ header nav ul li {
 header nav ul li a {
 color: inherit;
 text-decoration: none;
+}
+header nav li ul {
+  position: absolute;
+  display: none;
+  width: inherit;
+}
+header nav li:hover ul {
+  display: block;
+}
+header nav li ul li {
+  display: block;
 }

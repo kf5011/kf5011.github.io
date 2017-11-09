@@ -1,27 +1,34 @@
-pages:
+menu:
     - title: Home
       url: index.html
 
-    - title: You need
-      url: You-will-need.html
+    - title: Seminars
+      submenu:
+        - title: Week 1
+          url: l1
 
-    - title: Getting started
-      url: getting-started.html
+    - title: Other
+      submenu:
+        - title: You need
+          url: You-will-need.html
 
-    - title: Hardware
-      url: hardware.html
+        - title: Getting started
+          url: getting-started.html
 
-    - title: Software platform
-      url: platform.html
+        - title: Hardware
+          url: hardware.html
 
-    - title: Books
-      url: books.html
+        - title: Software platform
+          url: platform.html
 
-    - title: Course Structure
-      url: structure.html
+        - title: Books
+          url: books.html
 
-    - title: Assesment plan
-      url: assesement.html
+        - title: Course Structure
+          url: structure.html
 
-    - title: Student feedback
-      url: survey.html
+        - title: Assesment plan
+          url: assesement.html
+
+        - title: Student feedback
+          url: survey.html
