@@ -1,0 +1,61 @@
+---
+---
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    padding-left: 2em;
+    background: Whitesmoke;
+}
+
+code {
+    font-family: 'Inconsolata', monospace;
+}
+pre {
+    font-family: 'Inconsolata', monospace;
+}
+
+.alert {
+    background: hsl(205, 21%, 89%);
+    border-width: 1px 2px 1px 10px;
+    border-style: solid;
+    padding-left: 0.5em;
+    margin-right: 0.2em;
+    overflow: auto;
+}
+.code     { @extend .alert; border-color: SteelBlue; }
+.example  { @extend .alert; border-color: ForestGreen; }
+.note     { @extend .alert; border-color: Burlywood; }
+.warning  { @extend .alert; border-color: Orange; }
+.danger   { @extend .alert; border-color: red; }
+.question { @extend .alert; border-color: DarkGrey; }
+
+section {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+dt {
+    float: left ;
+    clear: left ;
+    text-align: right;
+    font-weight: bold;
+    width:  8em;
+    margin-right: 1em;
+}
+dt::after { content: ": "; }
+
+span  {
+    padding: 0px ;
+    border: thin solid grey;
+}
+span a {
+    background: lightgrey;
+    padding: 0px 5px;
+    text-decoration: none;
+    font-weight: bold;
+}

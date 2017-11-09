@@ -1,5 +1,5 @@
 ---
-layout: seminar
+layout: default
 title: Getting started
 ---
 # Getting started
@@ -51,7 +51,7 @@ You can pset the url into the command line for the `git clone` command
    ```shell_session
     $ git clone https://github.com/kf5011/simple-serial.git
    ```
-   {: .alert .code}
+   {: .code}
 
 If it clones sucessfully you'll see something like
 
@@ -63,7 +63,7 @@ If it clones sucessfully you'll see something like
    Unpacking objects: 100% (17/17), done.
    $
    ```
-   {: .alert .example}
+   {:  .example}
 
 You can now open the folder that has just been created in Atom through the "Add Project Folder" command.
 
@@ -72,15 +72,15 @@ You can now open the folder that has just been created in Atom through the "Add 
 >   ```shell_session
 >   $ atom simple-serial
 >   ```
->   {: .alert .code}
+>   {:  .code}
 >
 > or something like
 >   ```shell_session
 >   $ cd simple-serial
 >   $ atom .
 >   ```
->   {: .alert .code}
-{: .alert .example}
+>   {:  .code}
+{:  .example}
 
 # Working on the Project
 [Atom](https://atom.io) and [PlatformIO](http://platformio.org/) provide a good environment for writing program code.
@@ -108,8 +108,8 @@ Once the code is built, it will need transfering (*uploading*) to the K64F devic
 >    ```shell_session
 >    $ sudo useradd student dialout
 >    ```
->    {: .alert .code}
-{: .alert .warning}
+>    {:  .code}
+{:  .warning}
 
 ![Atom](images/atom-serial.png){: style="float:left; margin-right:1em"}
 ## Evaluate
@@ -134,21 +134,21 @@ First you have to _stage_ the files that you want to record,
    ```shell_session
    $ git add src/main.
    ```
-   {: .alert .code}
+   {:  .code}
 
 Then once all the files of interest are staged, you can make the commit,
 
    ```shell_session
    $ git commit -m "Commit message/summary of changes"
    ```
-   {: .alert .code}
+   {:  .code}
 
    Latest versions of Atom have a `github` package to help with the stage, commit, and push operations.  It can clone public repositories, but has problems with any that need an id/password.
-   {: .alert .note}
+   {:  .note}
 
 # Push to repository
 Once you have finished working, you will want to put the local changes you have made back onto the server, using the `push` operation
    ```shell_session
    $ git push
    ```
-   {: .alert .code}
+   {:  .code}

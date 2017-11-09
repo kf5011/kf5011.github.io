@@ -1,23 +1,19 @@
 <html>
 <head>
-    <title>{{page.title}}</title>
-    <link href="css/layout.css" rel="stylesheet" >
+    <title>{{ site.title }}</title>
+    <link href="/css/layout.css" rel="stylesheet" >
+    <link href="/css/menu.css" rel="stylesheet" >
 </head>
 <body>
     <header>
         <nav>
-        <ul><li>&#x2630;</li>
+        <ul>&#x2630;
         {% for item in site.data.navigation.menu %}
-        {% if item.url %}
-        <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-        {% else %}
-        <li>{{ item.title }}<ul>
-          {% for subitem in item.submenu %}
-          <li><a href="{{ subitem.url }}">{{ subitem.title }}</a></li>
-          {% endfor %}
-        </li></ul>
-        {% endif %}
-        {% endfor %}
+        <li><a href="{{ item.url }}">{{ item.title }}</a>
+        {% if item.submenu[0] %}<ul>
+                {% for subitem in item.submenu %} <li><a href="{{ subitem.url }}">{{ subitem.title }}</a></li>
+                {% endfor %}</ul>{% endif %}
+        </li>        {% endfor %}
         </ul>
     </nav>
         <H1>{{page.title}}</h1>
@@ -26,7 +22,7 @@
     {{content}}
 <hr />
 <address>
-    Dr Alun Moon <br />
+    © 2017 &nbsp; Dr Alun Moon <br />
     <a href="mailto:alun.moon@northumbria.ac.uk?subject=feedback%20code%20wrangling">
     alun.moon@northumbria.ac.uk
     </a>

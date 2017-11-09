@@ -1,11 +1,19 @@
 menu:
     - title: Home
-      url: index.html
+      url: /index.html
+
+    - title: Lectures
+      url: /lectures.html
 
     - title: Seminars
+      url: /seminars.html
       submenu:
         - title: Week 1
-          url: l1
+          url: /seminars/01.html
+        - title: Week 2
+          url: /seminars/02.html
+        - title: Week 3
+          url: /seminars/03.html
 
     - title: Other
       submenu:

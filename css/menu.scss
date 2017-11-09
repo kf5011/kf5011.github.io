@@ -1,0 +1,51 @@
+---
+title: css driven menu
+---
+@import 'colours';
+
+header {
+margin: 0px 0px 0px -2em;
+    background-color: $Charcoal/3*2;
+    color: hsl(0, 0%, 96%);
+    padding-left: 2em;
+    padding-top: 10px;
+    padding-bottom: 0.5em;
+    width: 100%;
+}
+
+header nav ul {
+    margin: 0px;
+    padding: 0px;
+   list-style: none;
+    display: block;
+    padding: 0px 5px 0px 5px;
+}
+header nav ul li {
+    font-size: smaller;
+    margin-right: 10px;
+    list-style: none;
+    display: inline-block;
+    color: inherit;
+    padding:  0.5em 1em 0.5em 1em;
+}
+header nav ul li a {
+color: inherit;
+text-decoration: none;
+}
+header nav li:hover {
+    background: $Charcoal/2;
+    box-shadow: inset 0 0 1em Whitesmoke;
+}
+header nav li ul {
+    background: $Charcoal/2;
+  position: absolute;
+  display: none;
+  width: inherit;
+  margin-top: 0.5em;
+}
+header nav li:hover ul {
+  display: block;
+}
+header nav li ul li {
+  display: inline-block;
+}
