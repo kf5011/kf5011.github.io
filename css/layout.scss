@@ -52,10 +52,15 @@ dt::after { content: ": "; }
 span  {
     padding: 0px ;
     border: thin solid grey;
+    font-size: smaller;
 }
 span a {
     background: lightgrey;
     padding: 0px 5px;
     text-decoration: none;
     font-weight: bold;
+}
+span a:hover {
+    background:DarkSlateGrey;
+    color: Whitesmoke;
 }
