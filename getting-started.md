@@ -63,7 +63,7 @@ If it clones sucessfully you'll see something like
    Unpacking objects: 100% (17/17), done.
    $
    ```
-   {:  .example}
+   {: .example}
 
 You can now open the folder that has just been created in Atom through the "Add Project Folder" command.
 

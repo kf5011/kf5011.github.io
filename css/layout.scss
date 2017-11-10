@@ -49,18 +49,25 @@ dt {
 }
 dt::after { content: ": "; }
 
-span  {
+span.file-link  {
     padding: 0px ;
     border: thin solid grey;
     font-size: smaller;
+    a {
+       background: lightgrey;
+       padding: 0px 5px;
+       text-decoration: none;
+       font-weight: bold;
+     }
+     a:hover {
+           background:DarkSlateGrey;
+           color: Whitesmoke;
+     }
 }
-span a {
-    background: lightgrey;
-    padding: 0px 5px;
-    text-decoration: none;
-    font-weight: bold;
+
+article.summary h2 {
+  margin: 0.5em;
 }
-span a:hover {
-    background:DarkSlateGrey;
-    color: Whitesmoke;
+article.summary p {
+  margin: 0.25em;
 }
