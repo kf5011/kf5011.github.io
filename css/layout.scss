@@ -29,7 +29,7 @@ pre {
 }
 .code     { @extend .alert; border-color: SteelBlue; }
 .example  { @extend .alert; border-color: ForestGreen; }
-.note     { @extend .alert; border-color: Burlywood; }
+.note     { @extend .alert; border-color: Burlywood; padding: 5px;}
 .warning  { @extend .alert; border-color: Orange; }
 .danger   { @extend .alert; border-color: red; }
 .question { @extend .alert; border-color: DarkGrey; }
@@ -70,4 +70,16 @@ article.summary h2 {
 }
 article.summary p {
   margin: 0.25em;
+}
+
+body { reset-counter: exercise }
+article.exercise {
+    border-width: 1px 2px 1px 10px;
+    border-style: solid;
+    padding-left: 0.5em;
+    border-color: SkyBlue;
+    list-style: decimal-leading-zero;
+    list-style-position: inside;
+    display: list-item;
+    margin: 1em;
 }
