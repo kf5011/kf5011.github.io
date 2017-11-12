@@ -26,6 +26,7 @@ github_username:
 markdown: kramdown
 kramdown:
     input: GFM
+highlighter: rouge
 theme: minima
 exclude:
   - Gemfile
