@@ -13,6 +13,6 @@ The .1, .2, sub-number indicates which of the two lectures the notes are for.
 &nbsp;
 <span class="file-link"><a href="notes/{{lecture.file|replace:".tex",".pdf"}}">PDF</a>&nbsp;slides&nbsp;</span>
 
-{{ lecture.excerpt }}
+{{ lecture.content }}
 
 {% endfor %}
