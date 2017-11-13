@@ -14,6 +14,16 @@ menu:
           url: /seminars/02.html
         - title: Week 3
           url: /seminars/03.html
+        - title: Week 4
+          url: /seminars/04.html
+        - title: Week 5
+          url: /seminars/05.html
+        - title: Week 6
+          url: /seminars/06.html
+        - title: Week 7
+          url: /seminars/07.html
+        - title: Week 8
+          url: /seminars/08.html
 
     - title: Other
       submenu:

@@ -17,7 +17,6 @@
 \usetikzlibrary{shapes.misc, shapes.symbols, positioning, calc}
 
 \usepackage{xcolor}
-\usepackage{ulem}
 \usepackage{siunitx}
 
 \title{Control systems and Computer Networks}
@@ -27,6 +26,30 @@
 \date{Lecture 1.1}
 \begin{document}
 \frame{\maketitle}
+
+\begin{frame}{What will I learn?}
+On this module you will learn about computer networks and networked embedded control systems. Many systems now use a network of small
+    computers and devices, from modern cars to the Internet of Things. This module looks at the interaction between devices (sensors and
+    actuators) and the controlling computer. The various networking and communications technologies that connect these systems together, their
+    infrastructure and protocols, will be discussed while considering cybersecurity architecture and operations as appropriate.
+
+    \hspace*{\fill}\emph{from the Module Specification}
+\end{frame}
+\begin{frame}{What will I learn?}
+    You will learn how to control hardware attached to computers. This involves understanding the basics of the electronic circuits used in
+    attaching the hardware, the features of the processors that interact with hardware and the writing of device drivers (the code that controls the
+    devices). You will learn about microprocessor organisation with respect to Input / Output (I/O) and software development for networked
+    control systems using an appropriate language.
+
+    \hspace*{\fill}\emph{from the Module Specification}
+\end{frame}
+
+\begin{frame}{Teaching Team}
+\begin{tabular}{ll}
+Module Tutor & Dr Alun Moon  \\
+    & Dr Michael Brockway \\
+\end{tabular}
+\end{frame}
 
 \begin{frame}{Teaching Structure}
   \begin{description}
@@ -41,7 +64,118 @@
       \item Largely self-contained
     \end{itemize}
     \item[Directed Study] Where appropriate I'll point you in the direction of resources to read
-  \end{description}
+    \item[Independent Learning] A further \SI{9}{\hour}
+\end{description}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Teaching Plan}%
+\vspace{-1.1em}\begin{enumerate}[Week 1]
+    \item \begin{description}
+        \item[Seminar] Digital I/O
+        \item[Lecture 1] Introduction and Overview
+        \item[Lecture 2] Digital Signals
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] Events and interrupts
+        \item[Lecture 1] Memory mapped I/O
+        \item[Lecture 2] Discrete time \& Interrupts
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] Analogue I/O
+        \item[Lecture 1] I2C, SPI, CAN, busses
+        \item[Lecture 2] Analogue Signals
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] LCD \& serial comms
+        \item[Lecture 1] Display code
+        \item[Lecture 2] Sensors
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] Control \& feedback
+        \item[Lecture 1] Control of systems
+        \item[Lecture 2] Finite state machines
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] Assembler and ABI
+        \item[Lecture 1] Sampling \& Nyquist limit
+        \item[Lecture 2] ARM architecture and assembler, ABI,
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] Data logging
+        \item[Lecture 1] Formats, XML, Json, Yaml
+        \item[Lecture 2] TCP stack, RFC1122, RFC1123, RFC768
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] ?
+        \item[Lecture 1] Server logging and analysis
+        \item[Lecture 2] Application layer, RFC2616, RFC7540, RFC1123
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] ?
+        \item[Lecture 1] Authentication, validity, md5 hashes, sha/NIST FIPS 180-4
+        \item[Lecture 2] TLS RFC5246, SSH / HTTPS RFC2818
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] ?
+        \item[Lecture 1] Encryption
+        \item[Lecture 2]  PGP RFC4880
+    \end{description}
+    \item  \begin{description}
+        \item[Seminar] Assignment support
+        \item[Lecture 1] Assignment support
+        \item[Lecture 2] Assignment support
+    \end{description}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Learning Outcomes}
+\textbf{Knowledge \& Understanding:}
+\begin{itemize}
+    \item  Demonstrate knowledge and critical
+    understanding of the interaction
+    between physical systems, computer
+    hardware and software, including
+    control theories, network protocols, and
+    cybersecurity architecture and
+    operations
+    \item Apply principles of design and
+    implementation of stack models,
+    network protocols, control systems, and
+    security
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Learning Outcomes}
+\textbf{Intellectual / Professional skills \& abilities:}
+\begin{itemize}
+    \item Design, implement, test, document and
+    evaluate a networked embedded control
+    system
+    \item Apply software development tools and
+    best practice to produce, test and
+    debug software for small networked
+    control systems using specifications for
+    embedded devices and associated
+    hardware
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Learning Outcomes}
+\textbf{Personal Values Attributes (Global / Cultural
+awareness, Ethics, Curiosity) (PVA):}
+\begin{itemize}
+    \item Demonstrate independent, critical and
+    reflective thinking and practice in the
+    development of a networked control
+    system, and engagement with appropriate professional and technical
+    literature to support and communicate
+    such development
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Software tools and resources}
+
 \end{frame}
 
 \end{document}

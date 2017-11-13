@@ -18,23 +18,21 @@ Having skimmed through [Lee & Varaiya](http://leevaraiya.org/) and [Lee & Seshia
 * **Analog Signals**
 * **Sampling** Nyquist limit
 
-## first go at a  weekly plan
-A first cut at some structure.  Based on existing module,
-
+## A  weekly plan
+How does this look as a plan?
 It may want some revision in the light of Lee & Varaiya, and Lee & Seshia.
 
-|     |theme | Lecture  | Practical   | Lecture  | Practical |
-| --- | -- | --  |-- |
-|1 |  | | | | |
-|2 | digital | Interface Arch | Digital in | Interface devices and circuits | Out
-|3 | analogue | Analog sensors & interfacing | Analogue input |
-|4 | interrupts | Interrupt handling | timers | | buttons |
-|5 | busses SPI, I²C|  | Control loops | feedback exercise
-|6 | Serial | Serial comms to PC | HCI | PC interface
-|  | assignment 1 | builds from practicals
-|7 |Data | Data logging | sample | Network stack, terms DNS, IP, MAC, UDP rfc1122/rfc1123 rfc768|
-|8 |     | Data formats, text, XML, Json, Yaml | parsing text | Application layer HTTP rfc2616/rfc7540, POP rfc1123  | Log data to server
-|9 | Control | Commands, formats | Protocols |  Remote Control
-|10|Security | Authentication, validity, md5 hashes, sha/NIST FIPS 180-4| | TLS rfc5246, SSH / HTTPS rfc2818 |
-|11|Encryption | | PGP/ rfc4880
-|12|
+| Week | Seminar | Lecture 1 | Lecture 2|
+| -- | --- | --- | --- |
+| 1 | Digital IO | Intro | Digital Signals|
+| 2 | Events, time & interrupts | memory mapped IO | Discrete time & interrupts|
+| 3 | Analog IO  | I²C SPI buses | Analog signals|
+| 4 | LCD & serial comms | Display code | Sensors |
+| 5 | Control & feedback | control of systems | Finite State-machine |
+| 6 | Assembler and ABI | Sampling, Nyquist| ARM architecture, assembler and ABI|
+| 7 | Data logging | Formats, XML, Json, Yaml | TCP stack RFC1122, RFC1123, RFC768|
+| 8|
+| 9  | | Server logging & analysis | App layer RFC2616, RFC7540, POP RFC1123|
+| 10 | | Authentication, validity, md5 hashes, sha/NIST FIPS 180-4 | TLS RFC5246, SSH / HTTPS RFC2818|
+| 11 | | Encryption | PGP RFC4880|
+| 12
