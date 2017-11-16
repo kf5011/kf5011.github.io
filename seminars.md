@@ -15,7 +15,7 @@ Within each seminar exercises are numbered 1, 1,… the associated Githib reposi
 
 
 # Getting started
-You should study the [Getting started](/getting-started.html) notes to see the workflow that is recommended for the practical work.
+You should study the [Getting started]({{site.baseurl}}{% link getting-started.md %}) notes to see the workflow that is recommended for the practical work.
 
 <hr />
 
@@ -23,8 +23,8 @@ You should study the [Getting started](/getting-started.html) notes to see the w
 {% for item in site.seminars %}
 <article class="summary">
 ## {{ item.title }}
-[{{ item.url }}]({{ item.url }})
-{{ item.excerpt }} [more…]({{item.url}})
+[{{item.url}}]({{item.url|relative_url}})
+{{ item.excerpt }} [more…]({{item.url|relative_url}})
 </article>
 <hr />
 {% endfor %}

@@ -1,18 +1,18 @@
 <html>
 <head>
     <title>{{ site.title }}</title>
-    <link href="/css/layout.css" rel="stylesheet" >
-    <link href="/css/menu.css" rel="stylesheet" >
-    <link href="/css/syntax.css" rel="stylesheet" >
+    <link href="{{site.baseurl}}{% link css/layout.scss %}" rel="stylesheet" >
+    <link href="{{site.baseurl}}{% link css/menu.scss %}" rel="stylesheet" >
+    <link href="{{site.baseurl}}{% link css/syntax.css %}" rel="stylesheet" >
 </head>
 <body>
     <header>
         <nav>
         <ul>&#x2630;
         {% for item in site.data.navigation.menu %}
-        <li><a href="{{ item.url }}">{{ item.title }}</a>
+		<li><a href="{{ item.url|relative_url }}">{{ item.title }}</a>
         {% if item.submenu[0] %}<ul>
-                {% for subitem in item.submenu %} <li><a href="{{ subitem.url }}">{{ subitem.title }}</a></li>
+			{% for subitem in item.submenu %} <li><a href="{{subitem.url|relative_url}}">{{ subitem.title }}</a></li>
                 {% endfor %}</ul>{% endif %}
         </li>        {% endfor %}
         </ul>

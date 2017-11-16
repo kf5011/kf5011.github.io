@@ -1,15 +1,15 @@
 <html>
 <head>
     <title>{{page.title}}</title>
-    <link href="css/layout.css" rel="stylesheet" >
-    <link href="css/syntax.css" rel="stylesheet" >
+    <link href="{{site.baseurl}}{% link css/layout.scss %}" rel="stylesheet" >
+    <link href="{{site.baseurl}}{% link css/syntax.css %}" rel="stylesheet" >
 </head>
 <body>
     <header>
         <nav>
         <ul><li>&#x2630;</li>
         {% for item in site.data.navigation.pages %}
-        <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+		<li><a href="{{item.url|relative_url}}">{{ item.title }}</a></li>
         {% endfor %}
         </ul>
     </nav>

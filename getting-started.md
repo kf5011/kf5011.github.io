@@ -25,10 +25,10 @@ The exercises for the practical sessions and the base skeleton for the assignmen
 ## Lab material
 Lab material will be distributed via public repositories, linked to from the module pages.  While you can download a .zip file containing the source, or clone the public repository, a better option is to fork the repository (which requires a Github account).
 
-![Github page](images/github-page.png)
+![Github page]({{site.baseurl}}{% link images/github-page.png%})
 
 # Forking a repository
-Look for the fork button ![fork button](images/fork-button.png) near the top right of the page.  _You will need to be signed into your gitub account_
+Look for the fork button ![fork button]({{site.baseurl}}{% link images/fork-button.png%}) near the top right of the page.  _You will need to be signed into your gitub account_
 
 Creating a fork, makes a copy of the repository under your id, you can then make changes to your copy, and log them back onto github servers.
 
@@ -42,9 +42,9 @@ Creating a fork, makes a copy of the repository under your id, you can then make
 Making a clone of the repository, makes a local copy of the files that you can work on.  Although there are some good GUI based tools, personally I've found that the command shell tool the most convenient for this stage.
 
 To clone the repository click on the green "Clone or download" button
-![git clone](images/clone-button.png)  You will see a drop down box with a url and a copy icon.
+![git clone]({{site.baseurl}}{% link images/clone-button.png%})  You will see a drop down box with a url and a copy icon.
 
-![git clone](images/clone-button-url.png)
+![git clone]({{site.baseurl}}{% link images/clone-button-url.png%})
 
 You can pset the url into the command line for the `git clone` command
 
@@ -85,9 +85,9 @@ You can now open the folder that has just been created in Atom through the "Add 
 # Working on the Project
 [Atom](https://atom.io) and [PlatformIO](http://platformio.org/) provide a good environment for writing program code.
 
-![Atom](images/atom.png)
+![Atom]({{site.baseurl}}{% link images/atom.png%})
 
-![Atom](images/atom-build.png){: style="float:left; margin-right:1em"}
+![Atom]({{site.baseurl}}{% link images/atom-build.png%}){: style="float:left; margin-right:1em"}
 ## Editing
 The code can be edited and saved just as with any editor (it's just text after all)
 
@@ -98,7 +98,7 @@ For the first run of the build, this can take time as the process may have to do
 
 {: style="clear:both"}
 
-![Atom](images/atom-upload.png){: style="float:left; margin-right:1em"}
+![Atom]({{site.baseurl}}{% link images/atom-upload.png%}){: style="float:left; margin-right:1em"}
 ## Uploading
 Once the code is built, it will need transfering (*uploading*) to the K64F device.  The **Upload** button launches this process using the USB connection to the device.  Usually this automatically finds the correct device.  On occasion it doesn't, I've found that closing Atom, unplugging the K64F then, first reconnecting the K64F _then_ starting Atom usually clears this up.
 
@@ -111,7 +111,7 @@ Once the code is built, it will need transfering (*uploading*) to the K64F devic
 >    {:  .code}
 {:  .warning}
 
-![Atom](images/atom-serial.png){: style="float:left; margin-right:1em"}
+![Atom]({{site.baseurl}}{% link images/atom-serial.png%}){: style="float:left; margin-right:1em"}
 ## Evaluate
 You need to check if the program is functioning correctly.
 
@@ -122,8 +122,8 @@ In the program running on the K64F you can use the standard-IO-library and `prin
 
 You can also send data to the K64F from the Serial-Monitor, text entered here can be read on the K64F with `scanf`, `getchar`, etc
 
-![Atom](images/atom-serial-monitor.png)
-![Atom](images/atom-serial-monitor-tux.png)
+![Atom]({{site.baseurl}}{% link images/atom-serial-monitor.png%})
+![Atom]({{site.baseurl}}{% link images/atom-serial-monitor-tux.png%})
 
 
 # Commit changes

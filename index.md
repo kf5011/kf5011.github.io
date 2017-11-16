@@ -7,19 +7,19 @@ title:  KF5011 Computer Networks and Control Systems
 ---
 
 
- * [Reading list](books)
- * [Development Software](platform)
- * [Course structure and content](structure)
- * [Hardware](hardware)
- * [Assessment](assessment)
+ * [Reading list]({{site.baseurl}}{%link books.md%})
+ * [Development Software]({{site.baseurl}}{%link platform.md%})
+ * [Course structure and content]({{site.baseurl}}{%link structure.md%})
+ * [Hardware]({{site.baseurl}}{%link hardware.md%})
+ * [Assessment]({{site.baseurl}}{%link assessment.md%})
 
- * [Getting Started](getting-started)
+ * [Getting Started]({{site.baseurl}}{%link getting-started.md%})
 
 The organisation [https://github.com/KF5011](https://github.com/KF5011) has several example projects that have been built for the system under consideration.
 
-[Module descriptor](KF5011.2016.pdf)
+[Module descriptor]({{site.baseurl}}{%link KF5011.2016.pdf%})
 
-If you're interested I've distilled the [results](survey) of the module satisfaction survey for the last (2016/17) run of small embedded systems  
+If you're interested I've distilled the [results]({{site.baseurl}}{%link survey.md%}) of the module satisfaction survey for the last (2016/17) run of small embedded systems  
 
 # Some initial notes that may become lectures.
 {% for repository in site.github.public_repositories %}
