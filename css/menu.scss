@@ -3,8 +3,9 @@ title: css driven menu
 ---
 @import 'colours';
 
-$backgnd: darken($Charcoal, 0.6);
-$menubg: darken($Charcoal, 0.4);
+$backgnd: $Charcoal;
+$menubg: lighten($Charcoal, 12%);
+$submenu: lighten($Charcoal, 5%);
 
 header {
 margin: 0px 0px 0px -2em;
@@ -36,11 +37,10 @@ color: inherit;
 text-decoration: none;
 }
 header nav li:hover {
-    background: $menubg;
-    box-shadow: inset 0 0 0.7em Whitesmoke;
+    background-color: $menubg;
 }
 header nav li ul {
-    background: $menubg;
+  background-color: $menubg;
   position: absolute;
   display: none;
   width: inherit;
@@ -51,4 +51,7 @@ header nav li:hover ul {
 }
 header nav li ul li {
   display: inline-block;
+}
+header nav li ul li:hover {
+  background-color: $submenu;
 }
