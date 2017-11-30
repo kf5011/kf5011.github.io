@@ -4,10 +4,12 @@ title: Hardware
 ---
 
 # FRDM K64F
-
-# Mbed Applications Shield
  * [Board's page in the mbed site](https://developer.mbed.org/platforms/FRDM-K64F/)
  * [NXP page with links to technical docs](http://www.nxp.com/products/software-and-tools/hardware-development-tools/freedom-development-boards/freedom-development-platform-for-kinetis-k64-k63-and-k24-mcus:FRDM-K64F)
+
+# Mbed Applications Shield
+ * [Mbed examples](https://os.mbed.com/components/mbed-Application-Shield/)
+
 # Windows 10 Fix
 Windows 10 seems to mess with the board reset.  The problem lies in that Windows is trying to write drive house-keeping data to the virtual usb drive that appears as "MBED" (folders like _System Volume Information_).
 
