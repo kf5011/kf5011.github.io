@@ -1,0 +1,7 @@
+<tr>
+<td>{{include.wk}}</td>
+{% assign aaa=include.a %}
+<td>{% include lectureis.html index=include.a %}</td>
+<td>{% include lectureis.html index=include.b %}</td>
+<td>{{site.seminars[include.s].title}}</td>
+</tr>
