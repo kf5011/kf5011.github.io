@@ -2,6 +2,17 @@ menu:
     - title: Home
       url: /index.html
 
+    - title: Resources
+      submenu:
+        - title: Software platform
+          url: platform.html
+
+        - title: Getting started
+          url: getting-started.html
+
+        - title: Hardware
+          url: hardware.html
+
     - title: Lectures
       url: /lectures.html
 
@@ -24,29 +35,3 @@ menu:
           url: /seminars/07.html
         - title: Week 8
           url: /seminars/08.html
-
-    - title: Other
-      submenu:
-        - title: You need
-          url: You-will-need.html
-
-        - title: Getting started
-          url: getting-started.html
-
-        - title: Hardware
-          url: hardware.html
-
-        - title: Software platform
-          url: platform.html
-
-        - title: Books
-          url: books.html
-
-        - title: Course Structure
-          url: structure.html
-
-        - title: Assesment plan
-          url: assesement.html
-
-        - title: Student feedback
-          url: survey.html
