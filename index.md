@@ -19,6 +19,8 @@ The organisation [https://github.com/KF5011](https://github.com/KF5011) has seve
 
 [Module descriptor]({{site.baseurl}}{%link KF5011.2016.pdf%})
 
+{% include tableoflectures.html %}
+
 If you're interested I've distilled the [results]({{site.baseurl}}{%link survey.md%}) of the module satisfaction survey for the last (2016/17) run of small embedded systems  
 
 # Some initial notes that may become lectures.

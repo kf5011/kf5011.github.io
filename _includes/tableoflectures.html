@@ -1,22 +1,28 @@
+---
 <table>
-    <colgroup>
-        <col span="1">
-        <col span="2" style="background-color:red">
-        <col span="2" style="background-color:yellow">
-        <col span="1" style="background-color:green">
-    </colgroup>
+        <col span="1" style="text-align:center;">
+        <col span="2" style="background-color:LightGrey">
+        <col span="2" style="background-color:hsl(0,0%,90%);">
+        <col span="1" style="background-color:LightGrey">
 <thead>
-    <tr><td>Week</td><td>Lecture A</td><td>Lecturer</td>
-                     <td>Lecture B</td><td>Lecturer</td>
+    <tr><td>Week</td><td>Lecture A</td>
+                     <td>Lecture B</td>
                      <td>Seminar</td></tr>
 </thead>
 <tbody>
 <tr><td></td><td>{% include lectureis.html index=0 %}</td></tr>
 
-{% include week.html wk=1 a=1 b=2 s=1 %}
-{% include week.html wk=2 a=3 b=4 s=2 %}
-{% include week.html wk=3 a=5 b=6 s=3 %}
-{% include week.html wk=4 a=7 b=8 s=4 %}
+{% include week.html wk=1 a=1 b=2 s=0 %}
+{% include week.html wk=2 a=3 b=4 s=1 %}
+{% include week.html wk=3 a=5 b=6 s=2 %}
+{% include week.html wk=4  a=7 b=8 s=3 %}
+{% include week.html wk=5  a=9 b=10 s=4 %}
+{% include week.html wk=6  a=11 b=12 s=5 %}
+{% include week.html wk=7  a=13 b=14 s=6 %}
+{% include week.html wk=8  a=15 b=16 s=7 %}
+{% include week.html wk=9  a=17 b=18 s=8 %}
+{% include week.html wk=10 a=19 b=20 s=9 %}
 
 </tbody>
 </table>
+---
