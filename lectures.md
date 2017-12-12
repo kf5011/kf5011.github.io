@@ -2,6 +2,9 @@
 title: Lectures
 layout: default
 ---
+ * toc
+ {:toc}
+
 ## numbering convention
 Lectures are numbered 01, 02,…  this is roughly aligned with the weeks in the semester, but it isn't a fixed mapping.
 
