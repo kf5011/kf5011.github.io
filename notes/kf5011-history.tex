@@ -41,11 +41,32 @@
 \end{columns}
 \end{frame}
 
+
+
+\begin{frame}{Ubiquitous }
+    \begin{itemize}[<+->]
+        \item Embedded systems outnumber PC "Computers"
+        \begin{itemize}
+            \item $\approx 100 : 1$
+        \end{itemize}
+        \item Many unseen
+        \begin{itemize}
+            \item 5 or more in the kitchen
+            \item at least 2 on the outside of the PC
+            \item several in this room
+        \end{itemize}
+        \item A "Computer" is a collection of several micro-cotrollers/processors
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Modern Network of systems}
+    \includegraphics[width=\textwidth]{CAN-car.png}
+\end{frame}
+
 \newcommand\redout{\bgroup\markoverwith
 {\textcolor{red}{\rule[0.3ex]{2pt}{2pt}}}\ULon}
-\begin{frame}{Reality bites}
-    \begin{itemize}
-        \item \only<1>{Virtual}\only<2->{\redout{Virtual}} Reality
+\begin{frame}{Control}
+    \begin{itemize}[<+->]
         \item Deal with physical signals
         \item Physical Quantities
         \item Sense environment
@@ -54,6 +75,13 @@
           \item Temperatures
           \item Button Presses
         \end{itemize}
+        \item Effect environment
+        \begin{itemize}
+            \item Lights \& Heating
+            \item Motors -- motion
+            \item Change physical quantities
+        \end{itemize}
+        \item \only<+>{Virtual Reality}\only<+->{\redout{Virtual} Reality}
     \end{itemize}
 \end{frame}
 

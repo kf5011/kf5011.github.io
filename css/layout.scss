@@ -22,7 +22,7 @@ pre {
     background: hsl(205, 21%, 89%);
     border-width: 1px 2px 1px 10px;
     border-style: solid;
-    padding: 5px 2em;
+    padding: 5px 1.5em;
     margin-right: 0.2em;
     overflow: auto;
 }
@@ -32,6 +32,7 @@ pre {
 .warning  { @extend .alert; border-color: Orange; }
 .danger   { @extend .alert; border-color: red; }
 .question { @extend .alert; border-color: DarkGrey; }
+.exercise { @extend .alert; border-color: SkyBlue; }
 
 
 section {
@@ -72,13 +73,6 @@ span.file-link  {
   margin: 0.25em;
 }
 
-.exercise {
-    border-width: 1px 2px 1px 10px;
-    border-style: solid;
-    padding-left: 0.5em;
-    border-color: SkyBlue;
-    margin: 1em;
-}
 
 span.hint::before {
     content: " hint: ";
