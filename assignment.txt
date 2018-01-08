@@ -1,0 +1,43 @@
+Assignment Brief --- Lunar Lander
+
+Provide: jar file -- local server on port nn
+	recieves json/yaml data as control signals
+	returns  update of position and sensor readings (Radar range etc)
+
+Task:
+Write two programs:
+ * Embeded system of K64F using switches and acellerometer/joystick as inputs
+   Some status on display and leds (contact/warning)
+ * Server/bridge - a GUI showing more information
+   - Sends control signals to server in 1, interprets data recieved
+   - Serial comms to embedded, custom student designed protocol over USB/Serial.
+
+Deliverables:
+	- embedded/pc protocol
+	- embedded sw
+	- pc sw
+
+Marking:
+	Criterion based cf. Dr Kevin Jacques  (Lincoln) , cf. Dan Hodgson
+	
+
+LEM:
+	Physics Server: 
+		written in Java(Processing), run as a jar file
+		System is 2D (Easy to handle for ground and graphics)
+		Implements physics and trajectory, models ground and impact!
+		(use processing for noise based ground height)
+
+	Mode 1: inputs :
+			thrusters - rotation and minor translation
+			main engine - throttle setting 
+
+	Outputs:
+		(x,y,r) tripple for state
+		rate of change for state
+		altitude - radar range above ground
+
+	Mode 2:
+		ouput: Synthetic appature scan (ground profile)
+		array of heights for ±x
+
