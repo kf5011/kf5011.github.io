@@ -19,6 +19,6 @@ Roughly split into 2 interweaving streams,
 &nbsp;
 <span class="file-link"><a href="{{site.baseurl}}/notes/{{lecture.file|replace:".tex",".pdf"}}">PDF</a>&nbsp;slides&nbsp;</span>
 
-{{ lecture.content }}
+{{ lecture.excerpt }}
 
 {% endfor %}

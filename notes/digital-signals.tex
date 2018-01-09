@@ -1,0 +1,154 @@
+%&xelatex
+\documentclass[xcolor=svgnames]{beamer}
+\usepackage[british]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+%\usetheme[block=fill,progressbar=frametitle]{metropolis}
+\usepackage{lmodern}
+
+\usepackage{bytefield}
+\usepackage{tikz}
+\usetikzlibrary{shapes.misc, shapes.symbols, positioning, calc}
+
+\usepackage{xcolor}
+
+\usepackage{siunitx}
+\usepackage{tikz-timing}
+\usepackage{circuitikz}
+
+\useinnertheme{default}
+\useoutertheme{infolines}
+\usecolortheme{seahorse}
+\setbeamercolor*{alerted text}{fg=blue!75!black}
+\setbeamertemplate{blocks}[rounded]
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[square]
+
+\usecolortheme{rose}
+\definecolor{NUblue}{RGB}{62,141,165}
+\definecolor{NUbluedark}{RGB}{40,119,143}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=NUblue}
+\setbeamercolor*{palette quaternary}{fg=white,bg=NUbluedark}
+\setbeamercolor{section in head/foot}{fg=white,bg=NUbluedark}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{frametitle}{fg=NUbluedark!150,bg=NUblue!40}
+\setbeamercolor{title in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{author in head/foot}{fg=white, bg=NUbluedark}
+\setbeamercolor{date in head/foot}{fg=white, bg=NUblue!60}
+\setbeamercolor{title}{fg=NUbluedark!150,bg=NUblue!30}
+\setbeamercolor{date}{fg=NUbluedark!150}
+\setbeamercolor{block title}{fg=white,bg=NUblue}
+
+\title{Digital Signals}
+\subtitle{Control systems and Computer Networks}
+
+\author{Dr Alun Moon}
+\date{Lecture 1.3}
+\begin{document}
+\frame{\maketitle}
+
+\begin{frame}{Digital Signals}{What is a digital signal?}
+
+\vspace*{\fill}
+A Digital Signal is:\pause\\
+\vspace{\fill}
+\begin{tabular}{cc}
+\onslide<+->{True} & \onslide<+->{False} \\
+\onslide<+->{1} & \onslide<+->{0} \\
+\onslide<+->{on} & \onslide<+->{off} \\
+\onslide<+->{Pressed} & \onslide<+->{Not-pressed} \\
+\onslide<+->{High} & \onslide<+->{Low} \\
+\onslide<+->{\SI{5}{V}} & \onslide<+->{\SI{0}{V}} \\
+\onslide<+->{\SI{3.3}{V}} & \onslide<+->{\SI{0}{V}}
+\end{tabular}
+\vspace{\fill}
+\begin{itemize}[<+->]
+  \item from a software perspective anything convenient for us to use
+  \item there are external limitations and constraints,
+  \begin{itemize}
+    \item Physics
+    \item Standards
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Electrical Characteristics}
+  Generally :
+  \begin{description}
+    \item[positive voltage] logical 1
+    \item[negative voltage] logical 0
+  \end{description}
+\vspace{\fill}\pause
+Specific technologies have specific voltages for \alert{\emph{on}}
+\begin{description}
+  \item[TTL] \alert Transistor \alert Transistor \alert Logic \quad \SI{5}{V}
+  \item[CMOS] \alert Complementary \alert Metal \alert Oxide \alert Semiconductor
+  \quad \SI{3.3}{V}
+\end{description}
+
+\end{frame}
+
+\begin{frame}{Sequences}
+  Digital signals exist in sequences\ldots\pause
+  \begin{itemize}[<+->]
+    \item Traffic Lights
+    \begin{itemize}
+        \item Red $\rightarrow$ Red,Amber $\rightarrow$ Green
+          $\rightarrow$ Amber $\rightarrow$ Red \ldots
+    \end{itemize}
+    \item Flashing
+    \begin{itemize}
+      \item  On $\rightarrow$ Off $\rightarrow$ On \ldots
+    \end{itemize}
+  \end{itemize}
+
+\pause
+Can be written as a \alert{Timing Diagram}\\[1em]
+\begin{tikztimingtable}
+  Red   & HHHHHHLLLLLLHH\\
+  Amber & LLLLHHLLLLHHLL\\
+  Green & LLLLLLHHHHLLLL\\
+\end{tikztimingtable}
+\end{frame}
+
+\begin{frame}{Digital IO from the C}
+Microcontrollers (C) have dedicated hardware for digital IO.
+GPIO
+
+\begin{circuitikz}
+\draw (0,0) node[rectangle] {}
+  to[short, d-*] (1,0)
+  to[R] (2,0);
+\end{circuitikz}
+
+\end{frame}
+
+\end{document}
+%%%%======================
+---
+title: Digital Signals
+file: digital-signals.tex
+lecturer: Dr Alun Moon
+---
+Introduces the concepts of digital signals:
+ * Physical characteristics
+ * Programming and hardware support
+ * Mathematical models
+ * IO Circuits and signals
+
+sequences - traffic lights
+flashing - variable and pattern
+two handed start
+
+voltage divider-pull up-pulldown
+led - current sink - open drain mode
+
+
+Live demos...

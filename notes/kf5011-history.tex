@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 
-\usetheme[block=fill,progressbar=frametitle]{metropolis}
+%\usetheme[block=fill,progressbar=frametitle]{metropolis}
 \usepackage{lmodern}
 
 \usepackage{bytefield}
@@ -16,15 +16,74 @@
 \usetikzlibrary{shapes.misc, shapes.symbols, positioning, calc}
 
 \usepackage{xcolor}
-\usepackage{ulem}
+\usepackage[normalem]{ulem}
+
+\useinnertheme{default}
+\useoutertheme{infolines}
+\usecolortheme{seahorse}
+\setbeamercolor*{alerted text}{fg=blue!75!black}
+\setbeamertemplate{blocks}[rounded]
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[square]
+
+\usecolortheme{rose}
+\definecolor{NUblue}{RGB}{62,141,165}
+\definecolor{NUbluedark}{RGB}{40,119,143}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=NUblue}
+\setbeamercolor*{palette quaternary}{fg=white,bg=NUbluedark}
+\setbeamercolor{section in head/foot}{fg=white,bg=NUbluedark}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{frametitle}{fg=NUbluedark!150,bg=NUblue!40}
+\setbeamercolor{title in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{author in head/foot}{fg=white, bg=NUbluedark}
+\setbeamercolor{date in head/foot}{fg=white, bg=NUblue!60}
+\setbeamercolor{title}{fg=NUbluedark!150,bg=NUblue!30}
+\setbeamercolor{date}{fg=NUbluedark!150}
+\setbeamercolor{block title}{fg=white,bg=NUblue}
 
 \title{Control systems and Computer Networks}
-\subtitle{Embedded and Networked Systemn}
+\subtitle{Embedded and Networked Systems}
 
 \author{Dr Alun Moon}
 \date{Lecture 1.2}
 \begin{document}
 \frame{\maketitle}
+
+\begin{frame}{Embedded Systems}
+  \begin{itemize}[<+->]
+  \item A \alert{Computer} that is built into \alert{electronic devices} to
+        simplify the design or enhance performance.
+  \item Often the user is unaware of the presence of the computer.
+  \item Interacts with  the physical world.
+  \item \alert{Networked} communicates with other devices and computers to
+        co-ordinate actions and distribute the workload.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Characteristics}
+\begin{itemize}[<+->]
+  \item Reliability
+  \begin{itemize}
+    \item Mission Critical
+    \item life threatening
+    \item 24/7/365
+    \item Can't reboot
+  \end{itemize}
+    \item Performance
+    \begin{itemize}
+      \item \alert{Soft} and \alert{Hard} Real-Time requirements.
+      \item External events trigger actions.
+      \item Some degree of multi-tasking (interrupts/RTOS)
+      \end{itemize}
+    \item Cost
+    \begin{itemize}
+      \item Consumer market -- minimise manufacturing costs
+      \item Fast time to market required
+      \item No chance for future \emph{in service} modifications
+    \end{itemize}
+\end{itemize}
+\end{frame}
 
 \begin{frame}{Jacqard Loom}{Early industrial automation}
 \begin{columns}[onlytextwidth]
@@ -41,8 +100,6 @@
 \end{columns}
 \end{frame}
 
-
-
 \begin{frame}{Ubiquitous }
     \begin{itemize}[<+->]
         \item Embedded systems outnumber PC "Computers"
@@ -57,6 +114,13 @@
         \end{itemize}
         \item A "Computer" is a collection of several micro-cotrollers/processors
     \end{itemize}
+
+    \begin{block}{examples}<+->
+      \begin{itemize}
+        \item More than 86 billion ARM®-based chips shipped to date.
+        \item Microchip -- PIC and AVR (ATmega in Arduino)
+      \end{itemize}
+    \end{block}
 \end{frame}
 
 \begin{frame}{Modern Network of systems}
@@ -81,7 +145,7 @@
             \item Motors -- motion
             \item Change physical quantities
         \end{itemize}
-        \item \only<+>{Virtual Reality}\only<+->{\redout{Virtual} Reality}
+        \item \only<+(-1)>{Virtual Reality}\only<+(-1)->{\redout{Virtual} Reality}
     \end{itemize}
 \end{frame}
 
