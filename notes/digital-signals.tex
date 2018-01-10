@@ -10,7 +10,7 @@
 
 %\usetheme[block=fill,progressbar=frametitle]{metropolis}
 \usepackage{lmodern}
-
+\usepackage{textgreek}
 \usepackage{bytefield}
 \usepackage{tikz}
 \usetikzlibrary{shapes.misc, shapes.symbols, positioning, calc}
@@ -19,7 +19,7 @@
 
 \usepackage{siunitx}
 \usepackage{tikz-timing}
-\usepackage{circuitikz}
+\usepackage[european]{circuitikz}
 
 \useinnertheme{default}
 \useoutertheme{infolines}
@@ -118,16 +118,104 @@ Can be written as a \alert{Timing Diagram}\\[1em]
 \end{tikztimingtable}
 \end{frame}
 
-\begin{frame}{Digital IO from the C}
-Microcontrollers (C) have dedicated hardware for digital IO.
-GPIO
+\begin{frame}{Digital IO from the \textmu{}C}{%
+Microcontrollers (\textmu{}C) have dedicated hardware for digital IO.}
+\begin{itemize}
+  \item The K64F has 5 ports with 32 IO pins which can be used as GPIO pins
+        (\alert General \alert Purpose \alert Input \alert Output)
+  \item The IO circuit has a number of configureable options for each pin,
+        accessed through several registers
+  \item \alert{\textbf{ALL}} the appropriate bits need to be set or it doesn't work.
+\end{itemize}
 
-\begin{circuitikz}
-\draw (0,0) node[rectangle] {}
-  to[short, d-*] (1,0)
-  to[R] (2,0);
-\end{circuitikz}
+\end{frame}
 
+\begin{frame}{GPIO Hardware Registers}{Sequence and purpose of bits to set}
+There are several bits to set to configure the pin
+\begin{enumerate}
+  \item System Clock Gating Control Register  \alert{SCGC} \\
+    Enables the clock signal for the port, making it function
+  \item Pin Control Register \alert{PORTx\_PCRn}\\
+    a 32bit register for each pin setting several options
+    \begin{itemize}
+      \item IRQC -- Interrupt configuration (what causes an interrupt to occur)
+      \item MUX -- Pins have multiple functions, this selects the function to use.
+      \item DSE -- Drive Strength, the electrical characteristics of the output
+      \item ODE -- Open Drain, elctrical connections of the Output
+      \item PFE -- Passive Filter for inputs (debounce and glitch rejection)
+      \item SLE -- Slew Rate, how fast the output switches between high and Low
+      \item PE -- enable pull up or down resistor for inputs
+      \item PS -- selects the pull-up or pull-down resistor.
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{GPIO Hardware Registers}{Port Registers}
+  Each Port has several registers to use for the actual IO operations.
+  Each bit in the register corresponds to an external pin.
+  \begin{description}
+    \item[GPIOx\_PDOR] Port Data Output Register
+    \begin{enumerate}\setcounter{enumi}{-1}
+      \item Set the output to logic 0
+      \item Set the output to logic 1
+    \end{enumerate}
+    \item[GPIOx\_PSOR] Port Set Output Register
+    \begin{enumerate}\setcounter{enumi}{-1}
+      \item output does not change
+      \item Set the output to logic 1
+    \end{enumerate}
+    \item[GPIOx\_PCOR] Port Clear Output Register
+    \begin{enumerate}\setcounter{enumi}{-1}
+      \item output does not change
+      \item Set the output to logic 0
+    \end{enumerate}
+    \item[GPIOx\_PTOR] Port Toggle Output Register
+    \begin{enumerate}\setcounter{enumi}{-1}
+      \item Output does not change
+      \item Change the logic state of the output
+    \end{enumerate}
+  \end{description}
+\end{frame}
+\begin{frame}{GPIO Hardware Registers}{Port Registers}
+  \begin{description}
+    \item[GPIOx\_PDIR] Port Data Input Register
+    \begin{enumerate}\setcounter{enumi}{-1}
+      \item Pin is set to input logic 0 (or is not configured)
+      \item Pin is set ti input logic 1
+    \end{enumerate}
+    \item[GPIOx\_PDDR] Port Data Direction Register
+    \begin{enumerate}\setcounter{enumi}{-1}
+      \item GPIO pin set as input
+      \item GPIO pin set as output
+    \end{enumerate}
+  \end{description}
+\end{frame}
+
+
+\begin{frame}{IO Circuits}{Output}
+\begin{itemize}
+  \item   The \textmu{}C pin is set to 0 or 1
+  \item in the case of the K64F $1\equiv\SI{3.3}{V}$
+  \item But what does that do?
+  \item It depends on the external circuit.
+\end{itemize}
+
+\begin{block}{The LED}
+\begin{columns}[onlytextwidth]
+  \begin{column}{.25\textwidth}
+\ctikzset{bipoles/length=.8cm}
+    \begin{circuitikz}
+      \draw (0,0) node[vcc] {\SI{3.3}{V}}
+        to[R] (0,-1)
+        to[empty led] (0,-2)
+        to[short, -o] (-1,-2) node[anchor=south]{IO pin};
+    \end{circuitikz}
+  \end{column}
+\begin{column}{.25\textwidth}
+
+\end{column}
+\end{columns}
+\end{block}
 \end{frame}
 
 \end{document}
