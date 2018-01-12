@@ -8,7 +8,6 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 
-\usetheme[block=fill,progressbar=frametitle]{metropolis}
 \usepackage{lmodern}
 
 \usepackage{bytefield}
@@ -18,12 +17,35 @@
 
 \usepackage{xcolor}
 \usepackage{siunitx}
+\useinnertheme{default}
+\useoutertheme{infolines}
+\usecolortheme{seahorse}
+\setbeamercolor*{alerted text}{fg=blue!75!black}
+\setbeamertemplate{blocks}[rounded]
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[square]
+
+\usecolortheme{rose}
+\definecolor{NUblue}{RGB}{62,141,165}
+\definecolor{NUbluedark}{RGB}{40,119,143}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=NUblue}
+\setbeamercolor*{palette quaternary}{fg=white,bg=NUbluedark}
+\setbeamercolor{section in head/foot}{fg=white,bg=NUbluedark}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{frametitle}{fg=NUbluedark!150,bg=NUblue!40}
+\setbeamercolor{title in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{author in head/foot}{fg=white, bg=NUbluedark}
+\setbeamercolor{date in head/foot}{fg=white, bg=NUblue!60}
+\setbeamercolor{title}{fg=NUbluedark!150,bg=NUblue!30}
+\setbeamercolor{date}{fg=NUbluedark!150}
+\setbeamercolor{block title}{fg=white,bg=NUblue}
 
 \title{Control systems and Computer Networks}
 \subtitle{Module Overview}
 
 \author{Dr Alun Moon}
-\date{Lecture 1.1}
+\date{Lecture 0.1}
 \begin{document}
 \frame{\maketitle}
 
@@ -46,8 +68,12 @@ On this module you will learn about computer networks and networked embedded con
 
 \begin{frame}{Teaching Team}
 \begin{tabular}{ll}
-Module Tutor & Dr Alun Moon  \\
+Module Tutor & Dr Alun Moon  \hfill\url{alun.moon@northumbria.ac.uk} \\
     & Dr Michael Brockway \\
+    & Dr David Kendall \\
+    & Dr. Nanlin Jin \\
+    & R. Dinakaran \\
+    & Kezhi Wang
 \end{tabular}
 \end{frame}
 
@@ -174,7 +200,55 @@ awareness, Ethics, Curiosity) (PVA):}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Software tools and resources}
+\begin{frame}{Software tools and resources}{Hardware}
+  \begin{description}
+    \item[FRDM k64F] an ARM Cortex M3 based Micro-controller in an Arduino like form factor
+    \item[MBED Application Shield] an Arduino compatible shield providing more IO Devices
+  \end{description}
+\begin{alertblock}{Loans}
+  \begin{itemize}
+  \item that they can come and sign out an MBED board from the
+        FEE equipment loans facility in PAN 113/114
+  \item The loans room will be open from 10-1 every weekday
+  \item for the remainder of the semester.
+\end{itemize}
+\begin{block}{\textsc{You have been warned}}
+\begin{itemize}
+  \item Overdue returns will be subject to a fine
+  \item Any lost or damaged equipment must be paid for or replaced.
+\end{itemize}
+\end{block}
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}{Software tools and resources}{Software}
+  \begin{description}
+    \item[Git] Github is used for disseminating exercises and examples]]
+    \alert{\textbf{And}} for submission of the assignment
+    \item[Atom] a good text-editor and development environment
+    \item[PlatformIO] a framework for Atom that supports embedded systems and IoT development
+    \item[LLVM- CLang] used by atom and platformio for managing source code, providing syntax highlighting, syntax checking, and auto-completion.
+    \item[Mercurial] another version control system, many of the Mbed libraries are available via a Mercuial repository.   With mercurial platformio can automatically download these.
+  \end{description}
+\end{frame}
+
+\begin{frame}{Availability}
+  \begin{itemize}
+    \item All the tools are Open-Source and available for free for Linux, Apple OSX, and Windows
+    \item I have build code for the K64F on all three OSs using this framework
+    \item I've build code for
+    \begin{itemize}
+      \item This platform K64F
+      \item the previous platform (LPC4088)
+      \item Arduino Uno (ATmega328P) using
+      \begin{itemize}
+        \item the Arduino language framework (C++)
+        \item bare metal C
+        \item assembly language
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
 
 \end{frame}
 
