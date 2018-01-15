@@ -106,7 +106,7 @@ Once the code is built, it will need transfering (*uploading*) to the K64F devic
 >
 > if you need to add yourself to the group on the University Linux machines you can use the command.
 >    ```shell_session
->    $ sudo useradd student dialout
+>    $ sudo adduser student dialout
 >    ```
 >    {:  .code}
 {:  .warning}

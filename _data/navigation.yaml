@@ -19,19 +19,19 @@ menu:
     - title: Seminars
       url: /seminars.html
       submenu:
-        - title: Week 1
+        - title: Seminar 1
           url: /seminars/01.html
-        - title: Week 2
+        - title: Seminar 2
           url: /seminars/02.html
-        - title: Week 3
+        - title: Seminar 3
           url: /seminars/03.html
-        - title: Week 4
+        - title: Seminar 4
           url: /seminars/04.html
-        - title: Week 5
+        - title: Seminar 5
           url: /seminars/05.html
-        - title: Week 6
+        - title: Seminar 6
           url: /seminars/06.html
-        - title: Week 7
+        - title: Seminar 7
           url: /seminars/07.html
-        - title: Week 8
+        - title: Seminar 8
           url: /seminars/08.html
