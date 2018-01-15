@@ -111,6 +111,12 @@ Once the code is built, it will need transfering (*uploading*) to the K64F devic
 >    {:  .code}
 {:  .warning}
 
+While the code is uploading, a green LED by the USB connection flashes.  
+*Wait* for this to stop flashing _before_ pressing the reset button.
+{: .danger}
+
+Once the code is uploaded, you will need to press and release the reset button, and then the code should run...
+
 ![Atom]({{site.baseurl}}{% link images/atom-serial.png%}){: style="float:left; margin-right:1em"}
 ## Evaluate
 You need to check if the program is functioning correctly.

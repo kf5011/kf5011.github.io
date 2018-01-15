@@ -14,6 +14,7 @@
 \usepackage{bytefield}
 \usepackage{tikz}
 \usetikzlibrary{shapes.misc, shapes.symbols, positioning, calc}
+\usetikzlibrary{arrows.meta}
 
 \usepackage{xcolor}
 
@@ -397,7 +398,42 @@ This is where constraints from the application domain,
 
 \end{exampleblock}
 \end{frame}
+
+\begin{frame}{Pullup and pulldown resistors}
+\begin{itemize}
+  \item  In a number of places pull-up and pull-down resistors are mentioned.
+  \item The problem occurs when a wire/pin has no input driving it, what logic value does it have?
+  \ctikzset{bipoles/length=.8cm}
+  \tikz \draw (0,0) to[short,o-] (0.5,0) to[push button] (2,0);
+\end{itemize}
+
+\begin{columns}[onlytextwidth]
+\begin{column}{0.48\textwidth}
+  \begin{block}{Pull-up resistor}
+    \alert{Pull-up} resistor connects the pin to the supply (logic 1) ensuring a 1 when there is no other signal.
+    \ctikzset{bipoles/length=.8cm}
+  \tikz{
+    \draw(0,0) to[short,o-*]  (0.5,0) to[push button] (2,0) node[ground] {};
+    \draw(0.5,0) to[R] (0.5,1) node[vcc] {};
+    }
+  \end{block}
+\end{column}
+\begin{column}{0.48\textwidth}
+  \begin{block}{Pull-down resistor}
+    \alert{Pull-down} resistor connects the pin to the ground (logic 0) ensuring a 0 when there is no other signal.
+    \ctikzset{bipoles/length=.8cm}
+  \tikz{
+    \draw(0,0) to[short,o-*] (0.5,0) to[push button] (2,0) node[vcc]{};
+    \draw(0.5,0) to[R] (0.5,-1) node[ground]{};
+    }
+
+  \end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
 \end{document}
+
 %%%%======================
 ---
 title: Digital Signals
