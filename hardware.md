@@ -2,6 +2,8 @@
 layout: default
 title: Hardware
 ---
+ * toc
+ {: toc}
 
 # FRDM K64F
  * [Board's page in the mbed site](https://developer.mbed.org/platforms/FRDM-K64F/)
@@ -9,6 +11,16 @@ title: Hardware
 
 # Mbed Applications Shield
  * [Mbed examples](https://os.mbed.com/components/mbed-Application-Shield/)
+
+# Storage
+For storage of the board I use a "Really Useful Box, 0.2litre" box.
+They are quite common, some (online options are)
+ * [staples](http://www.staples.co.uk/0-2-litre-box-clear/cbs/297704891.html)
+ * [maplin](https://www.maplin.co.uk/p/really-useful-02l-box-5-pack-n65fl)
+ * [hobycraft](http://www.hobbycraft.co.uk/really-useful-clear-box-02-litres/571333-1000)
+ * [amazon](https://www.amazon.co.uk/Really-Useful-Boxes-Rectangle-Box/dp/B001F67NJ4)
+
+Or just find a shop and buy one.
 
 # Windows 10 Fix
 Windows 10 seems to mess with the board reset.  The problem lies in that Windows is trying to write drive house-keeping data to the virtual usb drive that appears as "MBED" (folders like _System Volume Information_).
