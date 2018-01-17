@@ -138,7 +138,7 @@ Once you have a stable set of changes and want to record this point, you can com
 First you have to _stage_ the files that you want to record,
 
    ```shell_session
-   $ git add src/main.
+   $ git add src/main.cpp
    ```
    {:  .code}
 
