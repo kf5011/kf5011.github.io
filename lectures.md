@@ -16,9 +16,9 @@ Roughly split into 2 interweaving streams,
 {% for lecture in site.lectures %}
 ## {{lecture.url|remove:'/lectures/'|remove:'.html'}} {{ lecture.title }}
 _{{lecture.lecturer}}_  
-<span class="file-link"><a href="{{site.baseurl}}/notes/{{lecture.file}}">TeX</a>&nbsp;source&nbsp;</span>
+<span class="file-link"><a href="{{site.baseurl}}/lectures/{{lecture.file}}">TeX</a>&nbsp;source&nbsp;</span>
 &nbsp;
-<span class="file-link"><a href="{{site.baseurl}}/notes/{{lecture.file|replace:".tex",".pdf"}}">PDF</a>&nbsp;slides&nbsp;</span>
+<span class="file-link"><a href="{{site.baseurl}}/lectures/{{lecture.file|replace:".tex",".pdf"}}">PDF</a>&nbsp;slides&nbsp;</span>
 
 {{ lecture.excerpt }}
 
