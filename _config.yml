@@ -27,7 +27,7 @@ markdown: kramdown
 kramdown:
     input: GFM
 highlighter: rouge
-theme: jekyll-theme-cayman
+theme: jekyll-theme-minimal
 exclude:
   - Gemfile
   - Gemfile.lock
