@@ -17,8 +17,8 @@ title: KF5011 Computer Networks and Control Systems
 email: alun.moon@northumbria.ac.uk
 description: > # this means to ignore newlines until "baseurl:"
    Development and material for the new module, due Spring 2018
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/kf5011" # the subpath of your site, e.g. /blog
+url: "http://hesabu.net" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username:
 github_username:
 
