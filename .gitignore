@@ -1,6 +1,7 @@
 _site
 .sass-cache
 .jekyll-metadata
+Gemfile.lock
 
 # latex
 ## Core latex/pdflatex auxiliary files:
@@ -215,3 +216,7 @@ TSWLatexianTemp*
 *.exe
 *.out
 *.app
+
+# vim
+*.swp
+
