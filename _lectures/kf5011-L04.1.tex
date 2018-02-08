@@ -32,7 +32,7 @@
 \frametitle{A control system example}
 Suppose you have to write software for an industrial system. A simple example is one comprising a conveyor belt, a robot arm that picks items up from an input area and puts then on the the belt, and another robot arm that removes them from the far end of the belt.
 
-The three components have their own control software but a emph{supervisory unit} needs to coordinate their actions. In particular,
+The three components have their own control software but a \emph{supervisory unit} needs to coordinate their actions. In particular,
 \begin{itemize}
 \item When starting the system up, it needs to know when each of the other components is ready to act;
 \item When shutting the system down it needs to know there are no items part-way through the system;
@@ -85,7 +85,7 @@ The states are
 \item The labels may denote \emph{events} or \emph{actions} or \emph{conditions}
 \item {\color{blue}!ready} means the components have not all notified that they are ready; once they have ({\color{blue}ready} event) the system goes to {\color{brown}running} state.
 \item {\color{blue}+item} means an item has entered the system; {\color{blue}-item} means an item has been delivered by the system;
-\item {\color{blue}itemCt==0} means all items have been delivered; there are none left in the system, so the system tranfers to the  {\color{brown}stopped} state. Counter \texttt{itemCt} is  programmed to keep track of this.
+\item {\color{blue}itemCt==0} means all items have been delivered; there are none left in the system, so the system can transfer to the  {\color{brown}stopped} state. Counter \texttt{itemCt} is  programmed to keep track of this.
 \end{itemize}
 \end{frame}
 
@@ -153,13 +153,13 @@ The transition labels indicate \emph{events} that trigger change of state and/or
   \item an input from a sensor or the network;
   \item an interrupt
   \end{itemize}
-\item ... or just some predicate on the state variable (eg \texttt{\color{blue}itemCt == 0}) becomong \texttt{\color{blue}true}.
+\item ... or just some predicate on the state variable (eg \texttt{\color{blue}itemCt == 0}) becoming \texttt{\color{blue}true}.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Vending machine example}
-Another imformal example is a vending machine which
+Another informal example is a vending machine which
 \begin{itemize}
 \item allows the customer to choose quantities of each of a number of wares,
 \item will accept payment by cash or card, and
@@ -253,7 +253,7 @@ A early use of finite-state automata in theoretical computing science was to def
 \begin{itemize}
 \item Take a string of symbols from $A$, $a_1a_2a_3...a_n$ and present this as 'input' to an automaton $(Q, R, q_0, F)$. 
 \item Let the automaton run, 'consuming' a letter each time it takes a transition: 
-\item ... so the run will look something like $q_0 \stackrel{a_1}{\longrightarrow} q_1\stackrel{a_2}{\longrightarrow} q_2\stackrel{a_3}{\longrightarrow}q_3\stackrel{a_4}{\longrightarrow} ... \stackrel{a_n}{\longrightarrow} q_2$. 
+\item ... so the run will look something like $q_0 \stackrel{a_1}{\longrightarrow} q_1\stackrel{a_2}{\longrightarrow} q_2\stackrel{a_3}{\longrightarrow}q_3\stackrel{a_4}{\longrightarrow} ... \stackrel{a_n}{\longrightarrow} q_n$. 
 \end{itemize}
 \end{frame}
 
