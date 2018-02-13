@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: dpic version 2018.02.01 option -v for SVG 1.1 -->
+<!-- width="296" height="49" -->
+<svg
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+ xml:space="preserve"
+ style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
+ image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+ width="295.5px" height="48px"
+ viewBox="0 0 295.5 48"
+ font-size="11pt" text-anchor="middle"
+ stroke="black" stroke-miterlimit="10" stroke-width="1" fill="none">
+<g>
+<text stroke-width="0.2pt" fill="black" text-anchor="start" x="32.375" y="27.8125">
+ input
+</text>
+<polygon stroke-width="0" fill="black"
+ points="104.5,20.75 113.5,23
+104.5,25.25" />
+<line x1="68.5" y1="23" x2="111.438447" y2="23" />
+<rect x="113.5" y="0.5" width="67.5" height="45" />
+<text stroke-width="0.2pt" fill="black" x="145.285714" y="27.8125">
+ system
+</text>
+<polygon stroke-width="0" fill="black"
+ points="217,20.75 226,23
+217,25.25" />
+<line x1="181" y1="23" x2="223.938447" y2="23" />
+<text stroke-width="0.2pt" fill="black" x="257.785714" y="27.8125">
+ response
+</text>
+</g></svg>

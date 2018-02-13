@@ -33,7 +33,7 @@ pre {
 .danger   { @extend .alert; border-color: red; }
 .question { @extend .alert; border-color: DarkGrey; }
 .exercise { @extend .alert; border-color: SkyBlue; }
-
+.answer   { @extend .alert; border-color: MediumSlateBlue; }
 
 section {
     margin-top: 0.5em;
