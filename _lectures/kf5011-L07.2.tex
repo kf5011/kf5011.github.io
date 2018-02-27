@@ -1,0 +1,478 @@
+%&xelatex
+\documentclass[xcolor=svgnames]{beamer}
+\usepackage[british]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{tcolorbox,minted}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+%\usetheme[block=fill,progressbar=frametitle]{metropolis}
+\usepackage{lmodern}
+\usepackage{textgreek}
+\usepackage{bytefield}
+\usepackage{tikz}
+\usetikzlibrary{shapes.misc, shapes.symbols, positioning, calc}
+\usetikzlibrary{arrows.meta, shapes.geometric}
+
+\usepackage{xcolor}
+
+\usepackage{siunitx}
+\usepackage{tikz-timing}
+\usepackage[european]{circuitikz}
+
+\useinnertheme{default}
+\useoutertheme{infolines}
+\usecolortheme{seahorse}
+\setbeamercolor*{alerted text}{fg=blue!75!black}
+\setbeamertemplate{blocks}[rounded]
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[square]
+
+\usecolortheme{rose}
+\definecolor{NUblue}{RGB}{62,141,165}
+\definecolor{NUbluedark}{RGB}{40,119,143}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=NUblue}
+\setbeamercolor*{palette quaternary}{fg=white,bg=NUbluedark}
+\setbeamercolor{section in head/foot}{fg=white,bg=NUbluedark}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{frametitle}{fg=NUbluedark!150,bg=NUblue!40}
+\setbeamercolor{title in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{author in head/foot}{fg=white, bg=NUbluedark}
+\setbeamercolor{date in head/foot}{fg=white, bg=NUblue!60}
+\setbeamercolor{title}{fg=NUbluedark!150,bg=NUblue!30}
+\setbeamercolor{date}{fg=NUbluedark!150}
+\setbeamercolor{block title}{fg=white,bg=NUblue}
+
+\title{UDP, Data formats, Buffers, and Strings}
+\subtitle{Control systems and Computer Networks}
+
+\author{Dr Alun Moon}
+\date{Lecture 7.2}
+
+\tikzset{onslide/.code args={<#1>#2}{%
+\only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+}}
+\tikzset{temporal/.code args={<#1>#2#3#4}{%
+\temporal<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}{\pgfkeysalso{#4}} % \pgfkeysalso doesn't change the path
+}}
+
+
+\begin{document}
+\frame{\maketitle}
+
+\begin{frame}[fragile]{UDP reception}
+\begin{itemize}
+    \item Send and Recieve functions are \emph{blocking}
+    \item Need to run in a \emph{Thread} concurrently with other actions
+    \item \texttt{buffer} is written into
+    \item pointer to \texttt{SocketAddress}, for sending port and ip address
+\end{itemize}
+\begin{exampleblock}{}
+\begin{minted}{c}
+while(1){
+    char buffer[1024]; /* 1k bytes */
+    SocketAddress source;
+    int len = udp.recvfrom( &source,
+                             buffer, sizeof(buffer));
+    buffer[len]='\0';
+\end{minted}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Common Data Format}
+\begin{itemize}
+    \item Line oriented
+    \item Key:Value pairs
+\end{itemize}
+\begin{block}{}
+\begin{itemize}
+    \item Email headers RFC822 \url{https://tools.ietf.org/html/rfc822}
+    \item HTTP headers RFC7230 \url{https://tools.ietf.org/html/rfc7230}
+\end{itemize}
+\end{block}
+
+\begin{exampleblock}{}
+\begin{verbatim}
+Date: 26/02/2018
+Pot1: 0.267
+AccX: -0.01
+\end{verbatim}
+\end{exampleblock}
+
+Two tasks:
+\begin{enumerate}
+    \item Split buffer into lines
+    \item Split line into \emph{Key}:\emph{Value} pairs
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]{UDP Data}{Array of bytes}
+    \begin{itemize}
+        \item UDP Datgrams hold the data as an array of bytes
+\begin{minted}{java}
+    byte[] payload;
+    DatagramPacket packet( payload, payload.length );
+\end{minted}
+
+\item Converting Bytes to Strings
+\begin{minted}{java}
+    String message = new String( packet.getData() );
+\end{minted}
+
+\item Converting Strings to bytes
+\begin{minted}{java}
+    packet.setData( message.getBytes() );
+\end{minted}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Splitting the input}
+Java Strings have all you need for handling the message data,
+\begin{itemize}
+    \item \texttt{split} returns an array of strings
+\begin{minted}{java}
+    String[] lines = message.split("\n");
+\end{minted}
+
+\item \texttt{trim} gets rid of whitespace at the beginning and end of a string
+\begin{minted}{java}
+    String clean = message.trim();
+    String lines[] = message.trim().split("\n");
+\end{minted}
+
+\item arrays of lines can be iterated over
+\begin{minted}{java}
+    for( String line : lines ) {...}
+\end{minted}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Handling lines}
+\begin{itemize}
+\item lines can be split on a colon delimeter
+\begin{minted}{java}
+    String[] pair = line.split(":");
+\end{minted}
+
+\item there should be 2 elements in the array, the first is the key.
+\begin{minted}{java}
+    String key = pair[0];
+\end{minted}
+
+\item  the second is the value.
+\begin{minted}{java}
+    String value = pair[1];
+\end{minted}
+
+\item I use a hashtable to store the key-value pairs
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Java -- String methods}
+\begin{minted}{java}
+DatagramPacket msg = new DatagramPacket(buffer, buffer.length);
+socket.receive(msg);
+String message = new String(msg.getData());
+String[] lines = message.trim().split("\n");
+for(String l : lines ) {
+    if( l.length()>0 ) {
+        String[] pair = l.trim().split(":");
+        if(pair.length==2) datatable.put(pair[0], pair[1]);
+    }
+}
+\end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]{C String handling is not quite so neat}
+A Quick review of strings in C:
+\begin{itemize}
+    \item Strings are arrays of \mintinline{c}{char}
+    \begin{minted}{c}
+        char string[80];
+    \end{minted}
+    \item Pointers to \mintinline{c}{char} are also strings
+    \begin{minted}{c}
+        char *string;
+    \end{minted}
+    \item Strings are stored as \textsc{ascii} values\\ with a terminating byte value of zero
+    \begin{minted}{c}
+        "hello" === {104,101,108,108,111,0}
+    \end{minted}
+    \item Remember \alert{No Bounds Checks on Arrays}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{UDP Datagrams}
+The MBED library just sends a block of data bytes/char
+\begin{exampleblock}{}
+\begin{minted}{c}
+    UDPSocket udp;
+    char *buffer;
+    int data_size;
+    udp.sendto( server, buffer, data_size );
+\end{minted}
+\end{exampleblock}
+How to find size of data?  Numer of bytes to send?
+\begin{itemize}
+    \item Use size of array declaration from compile time
+    \begin{minted}{c}
+        char data[256];
+        int len = sizeof(data);
+    \end{minted}
+    \mintinline{c}{sizeof} is a compile time operator
+    \item length of a string
+    \begin{minted}{c}
+        int len = strlen( datamessage );
+    \end{minted}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Building a Datagram message}
+For simple messages
+\begin{exampleblock}{Print to string}
+\begin{minted}{c}
+    sprintf( buffer, "pot:%f \n", value);
+\end{minted}
+\end{exampleblock}
+
+Slightly more complex
+\begin{exampleblock}{Print to string}
+\begin{minted}{c}
+    sprintf( buffer, "pot 1:%f \npot 2: %f\n", one, two);
+\end{minted}
+\end{exampleblock}
+
+Does it scale?
+\end{frame}
+
+\begin{frame}[fragile]{More complex messges}{build it a line at a time}
+\begin{description}
+    \item[\mintinline{c}{strcat}] concatenates (joins) strings
+    \item[\mintinline{c}{sprintf}] writes formatted text to strings
+\end{description}
+Start with empty buffer
+\begin{exampleblock}{}
+\begin{minted}{c}
+  char buffer[512], line[80];
+  buffer[0]='\0'; /* make buffer look like empty string */
+\end{minted}
+\end{exampleblock}
+Format each line and concatenate it with buffer
+\begin{exampleblock}{}
+\begin{minted}{c}
+    sprintf(line,"POT 1:%f\n",left.read());
+    strcat(buffer,line);
+
+    sprintf(line,"POT 2:%f\n",right.read());
+    strcat(buffer,line);
+
+\end{minted}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]{Splitting incoming messages in C}
+    By ``hand''
+    \begin{block}{Read line}
+    \begin{enumerate}
+        \item point line-pointer to beginning of buffer\\
+            \hfill\mintinline{c}{line = buffer;}
+        \item move the buffer-pointer along, looking for the end of line character \\\hfill\mintinline{c}{while(*buffer!='\n')++buffer;}
+        \item overwrite line ending with string terminator\\
+        \hfill\mintinline{c}{*buffer='\0';}
+        \item move buffer-pointer to first character of next line\\
+        \hfill\mintinline{c}{buffer++;}
+    \end{enumerate}
+    \end{block}
+    \begin{exampleblock}{Steps 3 and 4 can be combined}
+        \hfill\mintinline{c}{*buffer++ = '\0'}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{C String library to the rescue}
+The C string library has a function that performs a similar task \mintinline{c}{strtok}
+
+\begin{block}{Using \mintinline{c}{strtok}}
+\begin{enumerate}
+    \item In the initial call to \mintinline{c}{strtok} supply a pointer to the initial buffer, and the list (string) of delimiters\\
+    \hfill\mintinline{c}{char line = strtok(buffer, "\n\r");}
+    \item For subsequent calls, pass a NULL pointer to \mintinline{c}{strtok}, it ``remembers'' where it is in the original buffer.\\
+    \hfill\mintinline{c}{ line = strtok(NULL, "\n\r");}
+\end{enumerate}
+\end{block}
+
+\begin{alertblock}{Nested \mintinline{c}{strtok}}
+Because \mintinline{c}{strtok} remembers where it is internally, it cant be nested, one for reading lines, and one for splitting key value pairs.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Two solutions }
+\begin{block}{Use delimeter changes}
+    \begin{enumerate}
+        \item find first \emph{key} token \hfill\mintinline{c}{key = strtok(buffer,":");}
+        \item \emph{value} is the rest of the line
+        \hfill\mintinline{c}{value = strtok(NULL,"\n ");}
+        \item next \emph{key} is
+        \hfill\mintinline{c}{key = strtok(NULL,":");}
+        \item \emph{value} is the rest of the line
+        \hfill\mintinline{c}{value = strtok(NULL,"\n ");}
+    \end{enumerate}
+\end{block}
+
+\begin{exampleblock}{Re-entrant \mintinline{c}{strtok_r}}
+There is a version of \mintinline{c}{strtok}, that uses an external parameter to remember its place, these can be nested.
+
+\begin{enumerate}
+    \item Read line \hfill\mintinline{c}{line = strtok_r(buffer, "\n", &loc);}
+    \begin{itemize}
+        \item split line \hfill\mintinline{c}{key = strtok(line,":");}
+        \item  \hfill\mintinline{c}{value = strtok(NULL,":");}
+    \end{itemize}
+    \item read next line
+        \hfill\mintinline{c}{line = strtok_r(NULL, "\n", &loc);}
+\end{enumerate}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{For loop}
+\begin{itemize}
+    \item \mintinline{c}{strtok} fits nicely (if clumbersome looking) into a \mintinline{c}{for} loop
+    \item  \mintinline{c}{strtok} returns \mintinline{c}{NULL} if there are no more tokens to be found.
+\end{itemize}
+
+\begin{exampleblock}{}
+\begin{minted}{c}
+for(
+    line = strtok_r(buffer, "\r\n", &nextline);
+    line;
+    line = strtok_r(NULL, "\r\n", &nextline)
+) {
+    key = strtok(line, ":");
+\end{minted}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Using Key/values}
+\begin{itemize}
+    \item  Suppose I have a multi-line message.
+    \item First key is a message id.
+    \item different functions are needed for each message.
+    \item Can't use \mintinline{c}{switch} statements
+    \item \mintinline{c}{if  else if} with \mintinline{c}{strcmp} is messy
+\end{itemize}
+\begin{exampleblock}{}
+\begin{minted}{c}
+if( strcmp(key, "first-id")==0)
+else
+if (strcmp(key, "second-id")==0 )
+else
+\end{minted}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Look-up table and function pointers}
+\begin{itemize}
+    \item action is function that takes pointer to value (assume \mintinline{c}{strtok})\\
+    \begin{minted}{c}
+        typedef int (*action)(char *value);
+    \end{minted}
+    \item structure pairing string with action
+    \begin{minted}{c}
+    typedef struct {
+        char *key;
+        action act;
+    } tableentry;
+    \end{minted}
+    \item Array of these
+    \begin{minted}{c}
+        tableentry[] lookup = {
+            "foo", function1
+            "bar", somethingelse
+        };
+    \end{minted}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Tokenise message}
+\begin{itemize}
+    \item First token in buffer is ``action name''
+    \begin{minted}{c}
+        char *name = strtok(buffer, ":");
+    \end{minted}
+    \item Second in paramater (may be status)
+    \begin{minted}{c}
+        char *state = strtok_r(NULL, '\n');
+    \end{minted}
+    \item Find entry in lookup table with name
+    \begin{minted}{c}
+        int n = findintable(lookup, name);
+    \end{minted}
+    \item Call function
+    \begin{minted}{c}
+        lookup[n].act(state);
+    \end{minted}
+    \item Subsequent calls to \mintinline{c}{strtok(NULL,...)} in ``action'' walk down buffer  until exhausted.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Table lookup made easy}
+\begin{itemize}
+    \item Provide a comparison function with the same semantics as \texttt{strcmp} ie for \texttt{compare(A,B)}
+    \begin{tabular}{rl}
+        -1 & A is before B \\
+        0 & A and B are equal in order \\
+        1 & A is after B
+    \end{tabular}
+    \begin{minted}{c}
+        int order(void *A, void *B) {
+            tableentry *a=A , *b=B;
+            return strcmp(a->name, b->name);
+        }
+    \end{minted}
+    \item sort the table into order.
+    \begin{minted}{c}
+qsort( lookup, /* array of entries */
+       sizeof(lookup)/sizeof(tableentry), /* number of entries */
+       sizeof(tableentry),  /* size of each entry */
+       order /* ordering function */
+   );
+    \end{minted}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Find the entry}
+\begin{itemize}
+\item create a placeholder
+\begin{minted}{c}
+tableentry key;
+\end{minted}
+\item set the name to the key \mintinline{c}{char *key}
+\begin{minted}{c}
+key.name = key;
+\end{minted}
+\item call search
+\begin{minted}{c}
+tableentry *result = bsearch( &key, /* pointer to key */
+                lookup, /* array of entries */
+                sizeof(lookup)/sizeof(tableentry), /* number of entries */
+                sizeof(tableentry),  /* size of each entry */
+                order /* ordering function */
+       );
+\end{minted}
+\item call the function from the result
+\begin{minted}{c}
+result->act(state);
+\end{minted}
+\end{itemize}
+\end{frame}
+
+\end{document}
