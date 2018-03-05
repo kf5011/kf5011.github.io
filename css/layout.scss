@@ -91,6 +91,14 @@ span.hint {
     overflow: auto;
 }
 
+span.standout {
+    border-width: thin;
+    border-style: none;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 td {padding:5px;}
 tbody {border:thick solid green;}
 col {border:thin solid red;}

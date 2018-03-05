@@ -2,14 +2,14 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
 "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: dpic version 2018.02.01 option -v for SVG 1.1 -->
-<!-- width="456" height="72" -->
+<!-- width="458" height="72" -->
 <svg
  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
  xml:space="preserve"
  style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision;
  image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
- width="454.8px" height="70.68px"
- viewBox="0 0 454.8 70.68"
+ width="456.6px" height="70.68px"
+ viewBox="0 0 456.6 70.68"
  font-size="11pt" text-anchor="middle"
  stroke="black" stroke-miterlimit="10" stroke-width="1" fill="none">
 <g>
@@ -34,20 +34,20 @@
 </text>
 <line x1="293.5" y1="23" x2="338.5" y2="23" />
 <circle fill="gray"
- cx="339.4" cy="23" r="0.9" />
+ cx="340.3" cy="23" r="1.8" />
 <polygon stroke-width="0" fill="black"
- points="376.3,20.75 385.3,23
-376.3,25.25" />
-<line x1="340.3" y1="23" x2="383.238447" y2="23" />
-<text stroke-width="0.2pt" fill="black" x="417.085714" y="20.9375">
+ points="378.1,20.75 387.1,23
+378.1,25.25" />
+<line x1="342.1" y1="23" x2="385.038447" y2="23" />
+<text stroke-width="0.2pt" fill="black" x="418.885714" y="20.9375">
  desired
 </text>
-<text stroke-width="0.2pt" fill="black" x="417.085714" y="34.6875">
+<text stroke-width="0.2pt" fill="black" x="418.885714" y="34.6875">
  temperature
 </text>
-<line x1="339.4" y1="23" x2="339.4" y2="68" />
-<circle cx="339.4" cy="68.09" r="0.09" />
-<line x1="339.4" y1="68.18" x2="147.25" y2="68.09" />
+<line x1="340.3" y1="23" x2="340.3" y2="68" />
+<circle cx="340.3" cy="68.09" r="0.09" />
+<line x1="340.3" y1="68.18" x2="147.25" y2="68.09" />
 <polygon stroke-width="0" fill="black"
  points="145,54.5 147.25,45.5
 149.5,54.5" />
