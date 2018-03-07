@@ -1,0 +1,365 @@
+\documentclass[10pt, hyperref={pdfpagelabels=false}]{beamer}
+
+\usepackage{tikz, verbatim, enumitem}
+
+\usetikzlibrary{decorations}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{patterns}
+\usetikzlibrary{snakes}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta}
+\usetikzlibrary{arrows,automata}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.3ex}
+
+\title{Encryption:\\The RSA Public Key Cipher}
+\author{Michael Brockway}
+\date{\today}
+
+\setlist[enumerate]{itemsep=0mm}
+\setitemize{label=\usebeamerfont*{itemize item}
+  \usebeamercolor[fg]{itemize item}
+  \usebeamertemplate{itemize item}}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview}
+Transport-layer security employs an asymmetric public cryptosystem to allow two parties (usually a client application and a server) to authenticate each other and negogiate parameters for their conversation.
+
+This lecture describes RSA, the cryptosystem devised by Rivest, Shamir and Adleman and commonly used for this putpose.
+
+RSA makes heavy use of \emph{modular arithmetic}; we start start with a reminder about this and an overiview of some key tools and principles needed for RSA.
+\end{frame}
+
+\begin{frame}
+\frametitle{Modular Arithmetic}
+In C/C++/Java, if \texttt{\color{blue}a}, \texttt{\color{blue}n} are \texttt{\color{blue}int} variables, the expression \texttt{\color{blue}a \% n} denotes the \emph{remainder} when \texttt{\color{blue}a} is integer-divided by \texttt{\color{blue}n}.
+
+In more mathematical language, we can say \emph{\color{blue}a, b are congruent} (or \emph{\color{blue}equivalent}) \emph{\color{blue}modulo n}, written {\color{blue}$a \equiv_n b$} to mean that a, b have the same remainder on integer-division by n: $a \% n = b \%n$.
+
+Modulo $n$ arithmetic features integers 0, 1, 2, 3, ... n-1. When you count up to $n$ you wrap around to 0. Instead of a `number line'
+\begin{figure}
+\includegraphics[width=\textwidth]{numLine.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modular Arithmetic - plus and minus}
+... we have a `number circle': here is one for modulo-15:
+\begin{figure}
+\includegraphics[width=\textwidth]{numCircle15.png}
+\end{figure}
+
+$(5 + 12) \equiv_{15} 17 \equiv_{15} 2$;
+\begin{itemize}
+\item ... or count around the circle: start from 5, count on 12, end up on 2.
+\end{itemize}
+
+$3 - 8 \equiv_{15} 10$
+\begin{itemize}
+\item start from 3, count back 8.
+\item 0r if you prefer, $(3 - 8) \equiv_{15} (15 + 3 - 8) \equiv_{15} 10$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modular Arithmetic - multiplication}
+We can multiply: $8 \times 5 \equiv_{15} 40 \equiv_{15} 10$. Check that starting from 0
+and counting 8 lots of 5 around the circle, you end up at 10.
+
+\begin{figure}
+\caption{Modulo 15 multiplication table}
+\includegraphics[width=0.8\textwidth]{mod15mulTbl.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modular Arithmetic - reciprocals}
+It is possible to divide, \emph{sometimes}. Interestingly 5 has no multiplicative
+inverse, or reciprocal modulo 15 (is there a 1 in row 5 of the multiplication table?)
+ but 8 does: there is a 1  in row 8, in column 2; so 2 is the mod 15 reciprocal of 8 (and \emph{vice versa}).
+
+$x$ has a {\color{blue}reciprocal modulo $n$} (a number $y$ such that $x \times y \equiv_n 1$) if and only if $x$ \emph{has no factor} (other than 1) in common with $n$. ($x$ and $n$ are \emph{relatively prime}).
+
+Since 5 has a factor in common with 15, 5 has no reciprocal modulo 15.
+
+The reciprocal of $x$ modulo $n$ we write = $x^{-1} mod~n$.
+
+Rows 0, 3, 5, 6, 9, 10, 12 of modulo 15 multiplication tabledo not have a 1 in. These numbers have a factor in common with 15, and so do not have a reciprocal modulo 15.
+
+\begin{itemize}
+\item 2 has a reciprocal: 8 ($2 \times 8 \equiv_{15} 1$ so $2^{-1} mod~15 = 8$)
+\item 13 has reciprocal, 7
+\item 4 is its own reciprocal. So is 11.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modular Arithmetic - reciprocals}
+When the modulus $n$ is a \emph{\color{blue}prime} number all numbers other than 0 have a reciprocal modulo $n$. Here is the modulo-13 multiplication table:
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{mod13mulTbl.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modular Arithmetic - exponentials}
+We also need to do exponentiation:
+\begin{itemize}
+\item $3^4 = 3 \times 3 \times 3 \times 3 = 81 \equiv_{15} 6$
+\item $3^4 = 81 \equiv_{9} 0$
+\item $5^6 = 5 \times 5 \times 5 \times 5 \times 5 \times 5\equiv_{9} 25 \times 25 \times 25 \equiv_{9} 7 \times 7 \times 7$ \\
+{\color{brown}[because $25 \equiv_{9} 7$]} $\equiv_{9} 4 \times 7 \equiv_{9} 28 \equiv_{9} 1$
+\end{itemize}
+
+Here is a table of exponentials in modulo 9, for nonzero exponent numbers
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{mod9eptls.png}
+\end{figure}
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{Modular Arithmetic - exponentiation}
+
+The algorithm to calculate b to the power of e, modulo n is quite neat:
+\color{blue}
+\begin{verbatim}
+set result initially = 1;
+while (e != 0) {
+  if (e modulo 2 != 0)
+    set result = (result * b) mod n;
+  set e = e / 2;
+  set b = (b*b) mod n;
+  }
+return result;
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modular Arithmetic - tools}
+You will find a number of resources for exploring modular arithmetic at 
+\texttt{\small\color{blue}http://computing.northumbria.ac.uk/staff/cgmb3/teaching/\\cryptography/index\_crypto.html}
+
+In particular, 
+\begin{itemize}
+\item \href{http://computing.northumbria.ac.uk/staff/cgmb3/teaching/cryptography/ModArithTables.xls}{\textcolor{blue}{Spreadsheets}}[click] from which the the multiplication and exponentiation tables above were made. Add your own sheets!
+\item \href{http://computing.northumbria.ac.uk/staff/cgmb3/teaching/cryptography/ModularCalc.jar}{\textcolor{blue}{A modular calculator}}[click] - run at a command-line, eg\\ \texttt{\color{brown}java -jar ModularCalc.jar 15} 
+\item \href{http://computing.northumbria.ac.uk/staff/cgmb3/teaching/cryptography/ModExp/ModExpAplt.class}{\textcolor{blue}{A java application to calculate modular exponentials}}[click] - download and run with java.
+\item \href{http://computing.northumbria.ac.uk/staff/cgmb3/teaching/cryptography/EuclideanAlg/EuclideanAlg.class}{\textcolor{blue}{A java implmentation of the extended Euclidean algorithm}}[click] - download and run with java.
+\end{itemize}
+This web page has links to the java source code of these tools, for your interest.
+\end{frame}
+
+\begin{frame}
+\frametitle{Modular Arithmetic - finding reciprocals}
+Computationally, modular reciprocals are found using the Euclidean algorithm
+\begin{itemize}
+\item See the last link above.
+\item Given two numbers x, y this algorithm will will find their \emph{greatest common divisor} – the largest number that exactly divides into x and y.
+\item It also displays the GCD as a linear combination of x, y:
+  \begin{itemize}
+  \item It will find r, s such that $GCD(x, y) = rx + sy$
+  \end{itemize}
+\item Eg $GCD(24, 54) = 6$; $6 = 24(-2) + 54 \times 1$
+\item For $x^{-1} mod~n$ to exist, $x$ and $n$ have to be relatively prime: $GCD(x, n) = 1$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modular Arithmetic - finding reciprocals}
+To calculate $x^{-1}$ mod $n$,
+\begin{itemize}
+\item Feed x, n into the Euclidean algorithm: get out numbers r, s such that
+$1 = GCD (x, n) = r x + s n$
+\item This tells us that $r x \equiv_n 1$: in other words, $x^{-1} mod~n$ is $r$.
+\end{itemize}
+
+For example $200003^-1 mod~263160$:
+\begin{itemize}
+\item feed 200003 and 263160 into the Euclidean algorithm and we get
+a message that their GCD = 1 and $1 = -68573\times263160 + 90227\times200003$
+\item This tells us $200003^{-1}$ mod 263160 = 90227
+\end{itemize}
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{Euclidean algorithm in brief}
+The ``classic'' Euclidean algorithm:
+{\color{blue}
+\begin{verbatim}
+To find the GCD of x and y {
+repeat {
+  Subtract the smaller of x, y from the bigger
+  Replace the bigger of x, y by this number
+}
+...until 0 is obtained.
+The last nonzero number is the GCD
+}
+\end{verbatim}
+}
+
+Example: GCD(36, 102):
+\begin{itemize}
+\item $36,102 \rightarrow 66; 36,66 \rightarrow 30; 36,30 \rightarrow 6; 30,6 \rightarrow 24;$ $24,6 \rightarrow 18; 18,6 \rightarrow 12; 12,6 \rightarrow 6; 6,6 \rightarrow 0$.
+\item GCD = 6
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Euclidean algorithm in brief}
+To recover r and s such that $GCD(x, y) = r x + s  y$
+\begin{itemize}
+\item It is necessary to keep track of all the repeated subtractions
+\item ``Unwind'' them to recover the original x, y; build up the values of
+r, s as you go.
+\end{itemize}
+
+The Euclidean algorithm application uses integer division rather than subtraction to speed things up a bit.
+
+x, y $\rightarrow$ quotient q, remainder r
+\begin{itemize}
+\item subtract x from y repeatedly until a number smaller than x is left
+\item q counts the subtractions, r is the number left
+\item $q = y / x$, $r = y~\%~x$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{RSA - Rivest, Shamir, Adleman Public Key Cryptosystem}
+Based on a clever theorem -
+\begin{itemize}
+\item Pierre de Fermat, in the 1600s, showed that if $m$ is any integer whatever, and $p$ is a prime number then {\color{blue}$m^{(p-1)} \equiv_p 1$}.
+\item Eg $4^6 = 8^3 \equiv_7 1^3 = 1$
+\item Leonard Euler, in the 1700s, extended this result: If $p$ and $q$ are prime numbers, and $n = p q$, and $m$ is any number relatively prime to $n$, then $m^{(p-1)(q-1)} \equiv_n 1$.
+\item It follows that for any $k$, {\color{blue}$m^{k(p-1)(q-1)+1} \equiv_n m$}.
+\end{itemize}
+
+To use this for cryptography,
+\begin{itemize}
+\item Our $m$ will be a block of bits -- part of a message to be encrypted
+\item The operation of raising $m$ to the power of $(p-1)(q-1) + 1$ (mod n)
+we will split into 2 parts: part 1 will be the encryption process, part
+2 will be the decryption process; applying one part after the other
+will give back the message block we started with.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Definition of an RSA Cryptosystem}
+\begin{itemize}
+\item Think of two big prime numbers -- nowadays, of the order of $2^{1024}$; call them p, q; Compute $n = p q$
+\item Pick a random number d bigger than p and q but smaller than n, such that d is relatively prime to $(p-1)(q-1)$
+\item Compute e, the reciprocal of d mod $(p-1)(q-1)$.
+  \begin{itemize}
+  \item $e d~\%~(p-1)(q-1) = 1$ (ie $e d \equiv_{(p-1)(q-1)} 1$)
+  \end{itemize}
+\item Publish the pair n, e -- these are your public key. Keep p, q, d secret
+\item Encryption: from each block of bits m, compute $c = m^e~\%~n$
+\item Decryption: from each encrypted block c, compute $m = c^d~\%~n$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Why this works}
+From Euler’s theorem, $m^{k(p-1)(q-1)+1} \equiv_n m$
+
+But we made e and d so that $e d \equiv_{(p-1)(q-1)} 1$. That is, e.d = 1 + a multiple of (p-1)(q-1). 
+
+So Euler’s result tells us that $m^{ed} \equiv_n m$
+
+In other words, $(m^e)^d \equiv_n m$
+
+So if $c \equiv_n m^e$ then $c^d \equiv_n m$
+
+In other words, if we encrypt by computing $c = m^e~\%~n$, then computing $c^d~\%~n$
+recovers the original $m$
+
+Thus encryption is {\color{blue}$c = m^e~\%~n$}; decryption is {\color{blue}$m = c^d~\%~n$}.
+\end{frame}
+
+\begin{frame}
+\frametitle{RSA example}
+$2^{18} = 262144$; With an $n$ just above this we can encrypt blocks of 18
+bits. Two prime numbers p = 613, q = 431 give n = 264203.
+
+(p-1)(q-1) = 263160
+
+Random number in range 614 -- 263159 inclusive, relatively prime to
+263160: d = 200003. This is prime and not a factor of 263160: it will do.
+
+$e = d^{-1}$ mod 263160
+\begin{itemize}
+\item We have a program to compute this: the Euclidean algorithm computes the greatest common divisor or factor of two numbers, and expresses it as a linear combination of the two numbers.
+\item Feed 200003 and 263160 into the Euclidean Algorithm application and it says:
+  \begin{itemize}
+  \item $1 = -68573 \times 263160 + 90227 \times 200003$;
+  \item GCD(263160,200003) = 1
+  \end{itemize}
+\item The second equation tells us something we knew already; the first tells us -
+\end{itemize}
+
+The reciprocal or inverse (mod 263160) of d = 200003 is e = 90227
+\end{frame}
+
+\begin{frame}
+\frametitle{RSA example}
+Check with a calculator that $200003 \times 90227$ \% 263160 = 1
+
+We now have a completely defined RSA crytposystem which we can use to encrypt and decrypt data in blocks of 18-bits.
+\begin{itemize}
+\item The public key is (n = 264203, e = 90227)
+\item Each block we interpret as a number $< 2^{18}$ = 262144; we can do arithmetic modulo n with such blocks.
+\end{itemize}
+
+Example: to encrypt the block 000100 000101 000100:
+\begin{itemize}
+\item 000100 000101 000100 (binary) = 16708 (decimal)
+\item $16708^{90227}$ \% 264203 = 111885 using modular exponentiation app
+\item = 011011 010100 001101
+\end{itemize}
+
+Decrypting:
+\begin{itemize}
+\item $111885^{200003}$ \% 264203 = 16708 = the original bits
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Security of RSA}
+Alice sends Bob a message $m$ using Bob's $n$, $e$ which are public. The computation $c = m^e~\%~n$ is easy and $c$ is sent to Bob.
+
+Bob must use his (private) $d$ to recover m: $m = c^d~\%~n$, also easy given knowledge of $d$.
+
+An eavesdropper must be able to figure out $d$. She knows $n$ and $e$, and knows that $d$ is the reciprocal of $e$ modulo $(p-1)(q-1)$. But she does not know $p, q$, although she does know $n = pq$.
+
+Eve can figure out p, q from pq by \emph{factorisation} if p, q, are small; but interestingly, inferring primes p, q from their product pq is HARD when p, q, are sufficiently large - around 1000 bits, for instance.
+
+As of 2010, the largest factorized pq was 768 bits long. This took, on a grid of parallel CPUs around 1500 CPU years (2 actual years on hundreds of computers). No larger RSA key is known publicly to have been factorized. 
+
+In practice, 1024 to 4096 a considered to suffice.
+\end{frame}
+
+\begin{frame}
+\frametitle{Further reading}
+You will find a number of resources for exploring RSA at 
+\texttt{\small\color{blue}http://computing.northumbria.ac.uk/staff/cgmb3/teaching/\\cryptography/index\_crypto.html}
+
+In particular, 
+\begin{itemize}
+\item \href{http://computing.northumbria.ac.uk/staff/cgmb3/teaching/cryptography/EulerFermatRSA.pdf}{\textcolor{blue}{A short paper}}[click] on the Euler-Fermat theorem and RSA;
+\item \href{http://computing.northumbria.ac.uk/staff/cgmb3/teaching/cryptography/MathsOfRSA.pdf}{\textcolor{blue}{An overview}}[click] of the mathematical basis of RSA;
+\item \href{http://computing.northumbria.ac.uk/staff/cgmb3/teaching/cryptography/PKCAttacks/BonehRSA-survey.pdf}{\textcolor{blue}{A survey of attacks}}[click] on RSA;
+\item \href{http://computing.northumbria.ac.uk/staff/cgmb3/teaching/cryptography/PKCAttacks/KocherTimingAttacks.pdf}{\textcolor{blue}{Another survey of attacks}}[click] on RSA;
+\item The Wikipedia articles on Integer factorization and on RSA are a good read.
+\end{itemize}
+\end{frame}
+
+\end{document}
+

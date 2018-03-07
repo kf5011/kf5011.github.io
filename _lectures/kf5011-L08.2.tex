@@ -1,0 +1,218 @@
+\documentclass[xcolor=svgnames]{beamer}
+\usepackage[british]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+%\usetheme[block=fill,progressbar=frametitle]{metropolis}
+\usepackage{lmodern}
+\usepackage{textgreek}
+\usepackage{bytefield}
+\usepackage{tikz}
+\usetikzlibrary{shapes.misc, shapes.symbols, positioning, calc}
+\usetikzlibrary{arrows.meta}
+
+\usepackage{xcolor}
+
+\usepackage{siunitx}
+\usepackage{tikz-timing}
+\usepackage[european]{circuitikz}
+
+\useinnertheme{default}
+\useoutertheme{infolines}
+\usecolortheme{seahorse}
+\setbeamercolor*{alerted text}{fg=blue!75!black}
+\setbeamertemplate{blocks}[rounded]
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[square]
+
+\usecolortheme{rose}
+\definecolor{NUblue}{RGB}{62,141,165}
+\definecolor{NUbluedark}{RGB}{40,119,143}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=NUblue}
+\setbeamercolor*{palette quaternary}{fg=white,bg=NUbluedark}
+\setbeamercolor{section in head/foot}{fg=white,bg=NUbluedark}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{frametitle}{fg=NUbluedark!150,bg=NUblue!40}
+\setbeamercolor{title in head/foot}{fg=white,bg=NUblue}
+\setbeamercolor{author in head/foot}{fg=white, bg=NUbluedark}
+\setbeamercolor{date in head/foot}{fg=white, bg=NUblue!60}
+\setbeamercolor{title}{fg=NUbluedark!150,bg=NUblue!30}
+\setbeamercolor{date}{fg=NUbluedark!150}
+\setbeamercolor{block title}{fg=white,bg=NUblue}
+
+\title{Control}
+\subtitle{Control systems and Computer Networks}
+
+\author{Dr Alun Moon}
+\date{Lecture 8.2}
+
+\tikzset{onslide/.code args={<#1>#2}{%
+\only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+}}
+\tikzset{temporal/.code args={<#1>#2#3#4}{%
+\temporal<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}{\pgfkeysalso{#4}} % \pgfkeysalso doesn't change the path
+}}
+
+
+\begin{document}
+\frame{\maketitle}
+
+\begin{frame}{Digital Control}
+    \begin{itemize}
+        \item The majority of embedded systems provide some form of control
+        \item Monitor some property of a system
+        \item Decide on what value it \emph{should} be
+        \item Drive the inputs to the system in such a way, so that the property reaches it's desired value.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Some terms}
+\begin{description}
+    \item[Plant] The system you want to control (older term)
+    \item[System] the thing controlled
+    \item[Process variable] The property measured,
+    \item[Set-point] the desired value of the \emph{process-variable}
+    \item[Control input] some property that the controller can affect, causeing a change in the monitored \emph{process variable}
+    \item[Controller] The algorithm and hardware that decides what inputs to use to move the \emph{process variable} to the \emph{set point}
+\end{description}
+\end{frame}
+
+\setlength{\unitlength}{2cm}
+\begin{frame}{Basic view of a system}
+    \begin{picture}(3.25,0.5)(0,-0.25)
+    \thicklines
+    % dpic version 2018.02.01 option (none, LaTeX picture assumed) for LaTeX
+    \put(0,-0.25){\makebox(0.75,0.5){\rlap{\hbox to 2.5bp{}input}}}
+    \put(1.15,0){\vector(1,0){0.1}}
+    \put(0.75,0){\line(1,0){0.4}}
+    \put(1.25,-0.25){\framebox(0.75,0.5){system}}
+    \put(2.4,0){\vector(1,0){0.1}}
+    \put(2,0){\line(1,0){0.4}}
+    \put(2.5,-0.25){\makebox(0.75,0.5){response}}
+    \end{picture}
+
+\begin{itemize}
+    \item A system can be anything, from the heating of a house, speed of a car,\ldots
+    \item Some \emph{inputs} can be changed
+    \begin{itemize}
+        \item The heating can be turned on or off
+        \item The throttle can be opened or closed
+    \end{itemize}
+    \item The system responds in some way that can be measured, temperature, speed, pressure, \ldots
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Control loop}
+    \begin{picture}(5.04,0.752)(0,-0.502)
+    \thicklines
+    % dpic version 2018.02.01 option (none, LaTeX picture assumed) for LaTeX
+    \put(0,-0.25){\makebox(0.75,0.5){setting}}
+    \put(1.15,0){\vector(1,0){0.1}}
+    \put(0.75,0){\line(1,0){0.4}}
+    \put(1.25,-0.25){\framebox(0.75,0.5){control}}
+    \put(2.4,0){\vector(1,0){0.1}}
+    \put(2,0){\line(1,0){0.4}}
+    \put(2.5,-0.25){\framebox(0.75,0.5){system}}
+    \put(3.25,0){\line(1,0){0.5}}
+    \put(3.77,0){\circle{0.04}}
+    \put(4.19,0){\vector(1,0){0.1}}
+    \put(3.79,0){\line(1,0){0.4}}
+    \put(4.29,-0.25){\makebox(0.75,0.5){\shortstack{desired\\%
+    temperature}}}
+    \put(3.77,0){\line(0,-1){0.5}}
+    \put(3.77,-0.501){\circle{0.002}}
+    \put(3.77,-0.502){\line(-1,0){2.145}}
+    \put(1.625,-0.35){\vector(0,1){0.1}}
+    \multiput(1.625,-0.501)(0,0.005033){31}{\makebox(0.005555,0.00825){\tiny .}}
+    \end{picture}
+
+Adding a control loop
+\begin{itemize}
+    \item Monitor the temperature
+    \item compare with the desired temperature
+    \item do something to the system to change the temperature as needed
+\end{itemize}
+\textbf{Feedback control}
+\end{frame}
+
+\begin{frame}
+\begin{block}{We're not going too deep}
+    \begin{itemize}
+        \item You can do whole Master's degrees on Control Engineering
+        \item Complex Mathematics
+        \begin{itemize}
+            \item Fourier analysis
+            \item Laplace transforms
+        \end{itemize}
+        \item You'll be please to know we're not going there here.
+        \item But I want to give you an insight into the principles
+    \end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{feedback controller}
+    \begin{picture}(5.74,0.902)(0,-0.502)
+    \thicklines
+    % dpic version 2018.02.01 option (none, LaTeX picture assumed) for LaTeX
+    \put(0,-0.25){\makebox(0.75,0.5){desired}}
+    \put(1.15,0){\vector(1,0){0.1}}
+    \put(0.75,0){\line(1,0){0.4}}
+    \put(1.35,0){\circle{0.2}}
+    \put(1.85,0){\vector(1,0){0.1}}
+    \put(1.45,0){\line(1,0){0.4}}
+    \put(1.95,-0.25){\framebox(0.75,0.5){control}}
+    \put(3.1,0){\vector(1,0){0.1}}
+    \put(2.7,0){\line(1,0){0.4}}
+    \put(3.2,-0.25){\framebox(0.75,0.5){system}}
+    \put(3.95,0){\line(1,0){0.5}}
+    \put(4.47,0){\circle{0.04}}
+    \put(4.89,0){\vector(1,0){0.1}}
+    \put(4.49,0){\line(1,0){0.4}}
+    \put(4.99,-0.25){\makebox(0.75,0.5){\shortstack{desired\\%
+    temperature}}}
+    \put(4.47,0){\line(0,-1){0.5}}
+    \put(4.47,-0.501){\circle{0.002}}
+    \put(4.47,-0.502){\line(-1,0){3.12}}
+    \put(1.35,-0.2){\vector(0,1){0.1}}
+    \put(1.35,-0.501){\line(0,1){0.301}}
+    \put(0.975,-0.1){\makebox(0.75,0.5){error}}
+    \end{picture}
+\begin{itemize}
+    \item Measure property
+    \item Check desired value
+    \item Calculate error between desired and current value
+    \item Use error to decide on what to do, how to change inputs
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{An Example}{Domestic heating }
+\begin{enumerate}
+    \item Set temperature on control
+    \item Measure room temperature
+    \item control:
+    \begin{itemize}
+        \item if too hot turn heating Off
+        \item if too cold turn heating On
+    \end{itemize}
+    \item Repeat every second, minute or so.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{}
+\end{frame}
+
+speed of system
+bang-bang
+proportional
+PID
+tuning (yuk)
+
+
+\end{document}

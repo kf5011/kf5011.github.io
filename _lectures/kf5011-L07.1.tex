@@ -1,0 +1,397 @@
+\documentclass[10pt, hyperref={pdfpagelabels=false}]{beamer}
+
+%\usepackage{tikz, verbatim, enumitem}
+\usepackage{tikz, verbatim}
+
+\usetikzlibrary{decorations}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{patterns}
+\usetikzlibrary{snakes}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta}
+\usetikzlibrary{arrows,automata}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.3ex}
+
+\title{The Application Layer}
+\author{Michael Brockway}
+\date{\today}
+
+%\setlist[enumerate]{itemsep=0mm}
+%\setitemize{label=\usebeamerfont*{itemize item}
+%  \usebeamercolor[fg]{itemize item}
+%  \usebeamertemplate{itemize item}}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Introduction}
+This lecture concerns the services the \emph{transport} layer (3) of the TCP/IP protocol stack provides for networking \emph{applications} in layer 4.
+
+We shall be concentrating on the \emph{transport control protocol (\color{blue}TCP}) and the \emph{user datagram protocol (\color{blue}UDP}).
+
+Points to remember from the last lecture that
+\begin{itemize}
+\item \emph{TCP} is a connection-oriented service which sets up a \emph{virtual circuit} between end-points and provides \emph{reliable} data transport between the end-points;
+\item \emph{UDP} is \emph{connectionless}, light-weight, and there-by, comparatively high-performance; and data transport between end-points is in the form of \emph{datagrams}, independent and individually addressed packets of data.
+\item The end-points are represented in software by constructs called \emph{sockets}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Programming TCP connections}
+\texttt{\#include <sys/socket.h>}
+\begin{itemize}
+\item \texttt{\color{blue}int socket(...)}; creates a new socket
+\item \texttt{\color{blue} int gethostname(char *name, int namelen)}; translates a host name to an ip address
+\item \texttt{\color{blue} int bind(int s, struct sockaddr *name, int namelen)}; binds a socket to a specific address (and port)
+\item \texttt{\color{blue} int connect(int s, struct sockaddr *addr, int *addrlen)}; used by client to request a socket connection to a remote address (and port)
+\item \texttt{\color{blue}void listen (socket\_id s, int backlog )}; causes server to start listening for requests for a connection
+\item \texttt{\color{blue}int accept(int s, struct sockaddr *addr, int *addrlen)}; used by server to accept a connection request from a client
+\item \texttt{\color{blue}int read(int d, char *buf, int nbytes)};
+\item \texttt{\color{blue}int write(int d, char *buf, int nb)}; d = socket id; reads from/writes to a socket
+\item \texttt{\color{blue}int close(int d)};
+\end{itemize}
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{TCP server logic}
+{\color{blue}
+\begin{verbatim}
+Fix the port number;
+Create a socket for the server;
+Start listening on the socket for requests to connect;
+Repeat –
+  Wait for a request for a connection.
+  Accept function returns id of a new socket which will manage the
+    connection; also gets the name of the client host.
+  Spin off a new thread to serve the client.
+\end{verbatim}
+}
+
+Serving the client
+\begin{itemize}
+\item A subroutine running in a new thread
+\item Uses socket returned by Accept function
+\item Uses socket I/O functions to send data to / receive data from client according to protocol
+\item When finished, closes the socket.
+\end{itemize}
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{TCP client logic}
+{\color{blue}
+\begin{verbatim}
+Specify server name/addr, port num to which we wish to connect;
+Create a socket;
+Bind this socket to host name and port number;
+Request a connection to the server host / port;
+if (return value indicates connection successful)
+ use socket I/O functions to send data to/receive data;
+Close the socket when finished.
+\end{verbatim}
+}
+\begin{itemize}
+\item The port number is same at both ends: 
+  identifies the virtual circuit between the client and server.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{TCP server and client examples}
+Download \texttt{\color{blue} \small http://computing.northumbria.ac.uk/staff/cgmb3/\\teaching/sockets/4JavaCExs/3\_CltSvrDataApp.zip}
+
+Unzip it in two hosts connected by a network.
+\begin{itemize}
+\item The server has a list of registered users with passwords, and a scoreboard: a list of player names and their scores.
+\item Any client may ask for and receive a complete scoreboard listing, or lines matching a submitted name.
+\item A registered user may log in using their password and may then edit the scoreboard: update, insert, delete lines.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{TCP server and client examples}
+The protocol
+\begin{itemize}
+\item \texttt{\color{brown}All>} - ask the server for a complete listing
+\item \texttt{\color{brown}Rpt\#Name>} - ask the server for score(s) matching Name
+\item \texttt{\color{brown}Login\#User\#Pswd>} - log in a user
+\item \texttt{\color{brown}Term>} - terminate current session (server still running)
+\end{itemize}
+
+Once logged in:
+\begin{itemize}
+\item  \texttt{\color{brown}Upd\#Name\#newScore>} - update score matching Name to newScore (a numeric string)
+\item  \texttt{\color{brown}Ins\#Name\#newScore>} - insert score (Name must not match an existing name)
+\item  \texttt{\color{brown}Del\#Name>} - delete score matching Name
+\item  \texttt{\color{brown}Down>} - down the server
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{TCP server and client examples}
+\begin{itemize}
+\item There are two clients: one with a GUI, written in Java, and one written in C, with a command-line user interface. The C client uses the 'simplified interface' tcpFunctions.{c,h}.
+
+\item The java server is multithreaded - each client accepted is served by a new thread which runs until the client terminates.
+
+\item The server goes on accepting new clients until a client sends a 'down' command. After this one more connection is accepted but the server goes to EOJ after that. Thus, ...
+
+\item Shutdown procedure: 
+  A logged-in client should send a "down" command, then terminate; another client will then be able to connect and terminate; the server will then finish.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{TCP server and client examples}
+Building the example: see make file - Java builds use javac, C builds use gcc.
+\begin{itemize}
+\item[\$]\texttt{make JServer}
+\item[\$]\texttt{make JClient}
+\item[\$]\texttt{make CServer}
+\item[\$]\texttt{make CClient}
+\item[\$]\texttt{make clean} (delete binary and intermediate files)
+\end{itemize}
+
+Run either server on a host on the same network as the client host. Quote a \emph{port number} on the command-line. \texttt{passwords.txt} and \texttt{scoreboard.txt} need to be in the same directory as the server executible.
+
+Run either client on a host on the same network as the server host. Quote the IP address of the server, and the port number, on the command line. The IP address should be quotated. 
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{Programming UDP}
+Again use a \emph{\color{blue}socket} but no connection is established. Instead,
+a version of the send function is used which incorporates a destination address parameter:
+{\color{blue}
+\begin{verbatim}
+int sendto(
+  int sockID,          //socket ID
+  char * msg,          //data payload (array of bytes)
+  unsigned int msgLen, //length of array
+  int flags,           //options; eg, non-blocking, timeout
+  struct sockaddr * destAddress,
+  unsigned int addressLen)
+\end{verbatim}
+}
+
+\texttt{\color{blue}destAddress} points to a record containing destination address information, including the IP address and port number.
+
+The return value is a result code: the number of bytes actually sent or (if negative) an error code.
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{Programming UDP}
+The corresponding receive function is incorporates a source address parameter:
+{\color{blue}
+\begin{verbatim}
+int recvfrom(
+  int sockID,          //socket ID
+  char * msg,          //array for data to go into
+  unsigned int msgLen, //length of array
+  int flags,           //options; eg, non-blocking, timeout
+  struct sockaddr * sourceAddress,
+  unsigned int * addressLen)
+\end{verbatim}
+}
+
+The return value in each case is the number of bytes received. 
+
+Note is the use of pointers to provide \emph{in/out} parameters: the memory pointed at by (non-null) \texttt{\color{blue}sourceAddress} and \texttt{\color{blue}addressLen} are filled in by the inpcoming message with source address data and its length.
+\end{frame}
+
+\begin{frame}
+\frametitle{Programming UDP}
+
+The sourceAddress and destAddress are 'struct' records incorporating addressing information, including the IP address and the port number. 
+
+\begin{itemize}
+\item The IP address directs a datagram to the correct host computer and
+\item the port number directs it to the correct process running on the host.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{UDP examples}
+Download \texttt{\color{blue} \small http://computing.northumbria.ac.uk/staff/cgmb3/\\teaching/sockets/3JavaExamples/UDP\_Java\_Echo.zip}
+
+Unzip it in two hosts connected by a network.
+
+This is a java implementation of a simple echo server and a client.
+\begin{itemize}
+\item Both have a simple grapical user interface.
+\item The client accepts a short message into a text box; ENTER dispatches it to the server.
+\item The Server unpacks it from the UDP datagram, displays information about the received packet in a scrolling JTextArea and simply sends a replay to the client coontaining a copy of the original message.
+\item The client displays information about the packet received in reply in a scrolling JTextArea.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{UDP examples}
+This example illustrate the rather neat Java encapsulation of UDP using classes
+\begin{itemize}
+\item java.net.DatagramSocket
+\item java.net.DatagramPacket
+\end{itemize}
+
+Simply run them in two networked hosts. You need to quote the IP address of the server on the command-line you use to start the client. The server knows the IP address of its client because it arrives in the packet.
+
+Try running a server with multiple clients. 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{UDP examples}
+Download \texttt{\color{blue} \small http://computing.northumbria.ac.uk/staff/cgmb3/\\teaching/sockets/4JavaCExs/5\_DisplayServer.zip}
+
+Unzip it in two hosts connected by a network.
+\begin{itemize}
+\item \texttt{DisplayServerUDP.java} is a server that uses connectionless UDP to display a graph of a time series of numbers that it receives as a series of UDP datagrams. 
+\item \texttt{DisplayClientUDP.java} and \texttt{DisplayClientUDP.c} are example clients. They send a burst of 200 random-walking numbers. Hit ENTER for another burst, x to finish.
+\end{itemize}
+
+This zip also contains a TCP client and server fr the sake of comparison. 
+\begin{itemize}
+\item \texttt{DisplayServer.java} is a server that provides the same service: displays a graph of a time series of numbers that it receives over a TCP connection.
+\item \texttt{DisplayClient.java} sends a burst of 200 random-walking numbers. Hit ENTER for another burst, x or X to finish.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{UDP (and TCP) examples}
+
+The TCP server and client are built with javac:
+\begin{itemize}
+\item[\$] \texttt{javac DisplayServer.java}
+\item[\$] \texttt{javac DisplayClient.java}
+\end{itemize}
+
+The UDP C client uses the 'simplified interface' tcpFunctions.{c,h} which have to be included in the build. To build the UDP examples use make (see make file - Java builds use javac, C builds use gcc):
+\begin{itemize}
+\item[\$] \texttt{make Server}
+\item[\$] \texttt{make JClient}
+\item[\$] \texttt{make CClient}
+\item[\$] \texttt{make clean} (delete binary and intermediate files)
+\end{itemize}
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{An EMBED client}
+Download \texttt{\color{blue} \small http://hesabu.net/kf5011/lectures/kf5011-L07-1-DisplayClient.zip}
+
+\footnotesize \color{brown}
+\begin{verbatim}
+#include <mbed.h>
+#include <EthernetInterface.h>
+#include <USBSerial.h>
+#include <rtos.h>
+#include <mbed_events.h>
+#include <C12832.h>
+
+EthernetInterface eth;
+UDPSocket udp;
+unsigned char buffer[8];
+
+char servAddr[] = "192.168.1.253";
+SocketAddress server(servAddr, 5000);
+
+union {
+  double xx;
+  unsigned char bts[8];
+} u;
+\end{verbatim}
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{An EMBED client}
+\footnotesize \color{brown}
+\begin{verbatim}
+/*** Switch to big-endian! Reverse byte order in byte array
+  * in: b; out: r
+  **/
+void revBytes(unsigned char *b, unsigned char *r, int lh) {
+  int i=0;
+  for (i = 0; i < lh; i++)
+    r[lh-1-i] = b[i];
+}
+
+AnalogIn left(A0), right(A1);
+C12832 lcd(D11, D13, D12, D7, D10); // Using Arduino pin notation
+
+DigitalOut red(LED_RED,1); /* initial state 1 led is off */
+DigitalOut green(LED_GREEN,1);
+DigitalOut blue(LED_BLUE,1);
+bool flashing = true;
+\end{verbatim}
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{An EMBED client}
+\footnotesize \color{brown}
+\begin{verbatim}
+/** update RGB LED: RGB = bottom 3 bits of s */
+void flash(void) {
+  static unsigned char s = 0; //initilised on first call only
+  if (flashing) {
+    s++;
+  } else {
+    s = 0;
+  }
+  red.write(1 - (s&1));
+  green.write(1 - ((s>>1)&1));
+  blue.write(1 - ((s>>2)&1));
+  wait(0.5);
+}
+
+void toggleFlash(void) {
+  flashing = !flashing;
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame} [fragile]
+\frametitle{An EMBED client}
+\footnotesize \color{brown}
+\begin{verbatim}
+int main() {
+  printf("connecting \n");
+  eth.connect();
+  const char *ip = eth.get_ip_address();
+  printf("IP address is: %s\n", ip ? ip : "No IP");
+
+  udp.open(&eth);
+  printf("sending to %s\n", servAddr);
+
+  while (true) {
+    u.xx = ((left.read() + right.read()*5)-3)*100;
+    revBytes(u.bts, buffer, 8);
+    nsapi_size_or_error_t r = udp.sendto(server, buffer, sizeof(buffer));
+    if (r < 0)
+      printf("sendto returned code %d\n",r);
+    //  printf("sent %d: %f\n", r, u.xx);
+    lcd.locate(0,10);
+    lcd.printf("data = %f", u.xx);
+    flash();
+    wait(0.5);
+  }
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Further reading}
+Kenneth L. Calvert and Michael J. Donahoo (The Morgan Kaufmann Practical Guides Series)
+\begin{itemize}
+\item TCP/IP Sockets in C, Second Edition: Practical Guide for Programmers  (2009)
+\item TCP/IP Sockets in Java, Second Edition: Practical Guide for Programmers (2008)
+\item Pocket Guide to TCP/IP Socket Programming in C (2000)
+\end{itemize}
+
+
+\end{frame}
+
+\end{document}
