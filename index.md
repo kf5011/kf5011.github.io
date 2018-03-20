@@ -14,21 +14,16 @@ title:  KF5011 Computer Networks and Control Systems
  * [Seminars]({{site.baseurl}}{%link seminars.md%})
 
 
-<h1>Assignment</h1>
-<ul>
-    <li> Assignment brief <a href="kf5011-assignment-brief.pdf">PDF</a></li>
-    <li> Game controller:
-    <ul>
-        <li><a href="https://classroom.github.com/a/VRh30nkL">Github classroom</a></li>
-        <li><a href="https://github.com/kf5011/game-controller-seed.git">Starter code</a> if not in initial repository</li>
-    </ul>
-    <li>Game Dashboard:
-    <ul>
-        <li><a href="https://classroom.github.com/a/APDfS3Bb">Github classroom</a></li>
-        <li><a href="https://github.com/kf5011/game-dashboard-seed.git">Starter code</a> if not in initial repository<li>
-    </ul>
-    <li>Lunar <a href="http://hesabu.net/kf5011/Lander.jar">Lander</a> server</li>
-</ul>
+# Assignment
+
++ Assignment brief <a href="kf5011-assignment-brief.pdf">PDF</a>
++ Game controller:
+  + <a href="https://classroom.github.com/a/VRh30nkL">Github classroom</a>
+  + <a href="https://github.com/kf5011/game-controller-seed.git">Starter code</a> if not in initial repository
++ Game Dashboard:
+  + <a href="https://classroom.github.com/a/APDfS3Bb">Github classroom</a>
+  + <a href="https://github.com/kf5011/game-dashboard-seed.git">Starter code</a> if not in initial repository
++ Lunar <a href="http://hesabu.net/kf5011/Lander.jar">Lander</a> server
 
 
 
